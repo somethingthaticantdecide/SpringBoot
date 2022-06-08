@@ -28,8 +28,9 @@ public class Film {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "poster")
-    public String poster;
+    @ManyToOne
+    @JoinColumn(name = "poster")
+    public Image poster;
 
     @Override
     public boolean equals(Object o) {

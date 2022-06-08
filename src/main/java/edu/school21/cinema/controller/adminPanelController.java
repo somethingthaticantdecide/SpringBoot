@@ -2,9 +2,11 @@ package edu.school21.cinema.controller;
 
 import edu.school21.cinema.model.Film;
 import edu.school21.cinema.model.Hall;
+import edu.school21.cinema.model.Image;
 import edu.school21.cinema.model.Session;
 import edu.school21.cinema.services.FilmService;
 import edu.school21.cinema.services.HallsService;
+import edu.school21.cinema.services.ImagesService;
 import edu.school21.cinema.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +25,16 @@ public class adminPanelController {
     private final FilmService filmService;
     private final HallsService hallsService;
     private final SessionService sessionService;
+    private final ImagesService imagesService;
+
     private final String uploadPath;
 
     @Autowired
-    public adminPanelController(FilmService filmService, HallsService hallsService, SessionService sessionService, String uploadPath) {
+    public adminPanelController(FilmService filmService, HallsService hallsService, SessionService sessionService, ImagesService imagesService, String uploadPath) {
         this.filmService = filmService;
         this.hallsService = hallsService;
         this.sessionService = sessionService;
+        this.imagesService = imagesService;
         this.uploadPath = uploadPath;
     }
 
@@ -55,9 +60,13 @@ public class adminPanelController {
                 String uuidFile = UUID.nameUUIDFromBytes(file.getBytes()).toString();
                 String resultFileName = uuidFile + "." + FilenameUtils.getExtension(file.getOriginalFilename());
                 file.transferTo(new File(uploadPath + "/" + resultFileName));
-                film.setPoster(resultFileName);
-            } else {
-                film.setPoster("/images/poster-holder.jpg");
+
+                Image image = new Image();
+                image.setFilename(resultFileName);
+                image.setSize(file.getSize());
+                image.setMime(file.getContentType());
+                imagesService.add(image);
+                film.setPoster(image);
             }
             filmService.add(film);
         }
