@@ -72,7 +72,7 @@
 				<td>${film.year}</td>
 				<td>${film.age}</td>
 				<td>${film.description}</td>
-				<td><img src="data:image/png;base64, ${film.poster}" style="height: 100px; width: 150px;"></td>
+				<td><img src="${film.poster}" style="height: 100px; width: 150px;" alt=""></td>
 			</tr>
 		</#list>
 	</table>

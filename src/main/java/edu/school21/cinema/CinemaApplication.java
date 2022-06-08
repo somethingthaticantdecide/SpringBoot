@@ -1,4 +1,4 @@
-package edu.school21.cinema.config;
+package edu.school21.cinema;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

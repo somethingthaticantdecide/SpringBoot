@@ -6,9 +6,9 @@ import edu.school21.cinema.model.Session;
 
 import edu.school21.cinema.services.FilmService;
 import edu.school21.cinema.services.HallsService;
-import edu.school21.cinema.services.MessagesService;
 import edu.school21.cinema.services.SessionService;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Objects;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/panel")
@@ -27,12 +28,14 @@ public class adminPanelController {
     private final FilmService filmService;
     private final HallsService hallsService;
     private final SessionService sessionService;
+    private final String uploadPath;
 
     @Autowired
-    public adminPanelController(FilmService filmService, HallsService hallsService, SessionService sessionService) {
+    public adminPanelController(FilmService filmService, HallsService hallsService, SessionService sessionService, String uploadPath) {
         this.filmService = filmService;
         this.hallsService = hallsService;
         this.sessionService = sessionService;
+        this.uploadPath = uploadPath;
     }
 
     @GetMapping
@@ -49,11 +52,17 @@ public class adminPanelController {
     @PostMapping(value = "/films/add", consumes = "multipart/form-data")
     public String addFilm(@ModelAttribute("film") Film film, @RequestParam("file") MultipartFile file) throws IOException {
         if (null != film && !film.getTitle().isEmpty()) {
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
             if (file.getSize() > 0) {
-                film.setPoster(Base64.getEncoder().encodeToString(file.getBytes()));
+                String uuidFile = UUID.nameUUIDFromBytes(file.getBytes()).toString();
+                String resultFileName = uuidFile + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+                file.transferTo(new File(uploadPath + "/" + resultFileName));
+                film.setPoster(resultFileName);
             } else {
-                String filename = Objects.requireNonNull(getClass().getClassLoader().getResource("/images/poster-holder.jpg")).getFile();
-                film.setPoster(Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(new File(filename))));
+                film.setPoster("/images/poster-holder.jpg");
             }
             filmService.add(film);
         }

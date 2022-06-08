@@ -1,4 +1,4 @@
-package edu.school21.cinema.config;
+package edu.school21.cinema;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
