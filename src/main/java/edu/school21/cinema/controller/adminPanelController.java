@@ -3,22 +3,17 @@ package edu.school21.cinema.controller;
 import edu.school21.cinema.model.Film;
 import edu.school21.cinema.model.Hall;
 import edu.school21.cinema.model.Session;
-
 import edu.school21.cinema.services.FilmService;
 import edu.school21.cinema.services.HallsService;
 import edu.school21.cinema.services.SessionService;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
-import java.util.Objects;
 import java.util.UUID;
 
 @Controller

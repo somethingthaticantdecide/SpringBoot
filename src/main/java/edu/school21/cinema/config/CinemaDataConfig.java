@@ -10,7 +10,6 @@ public class CinemaDataConfig {
     @Value("${uploadPath}")
     private String path;
 
-
     @Bean
     public String uploadPath() {
         return path;
