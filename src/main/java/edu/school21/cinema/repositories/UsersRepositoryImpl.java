@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public class FWADaoImpl implements FWADao {
+public class UsersRepositoryImpl implements UsersRepository {
 
     @PersistenceContext
     private EntityManager entityManager;

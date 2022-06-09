@@ -2,7 +2,7 @@ package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.model.*;
 
-public interface FWADao {
+public interface UsersRepository {
 
     void add(User user);
 

@@ -27,7 +27,6 @@ public class SessionRepositoryImpl implements SessionRepository {
         return entityManager.createQuery(" from Session ", Session.class).getResultList();
     }
 
-
     @Override
     public Session getSessionById(Integer id) {
         return entityManager.find(Session.class, id);
@@ -39,6 +38,7 @@ public class SessionRepositoryImpl implements SessionRepository {
 //                .setParameter("film", getByTitle(filmName)).getResultList();
 //        entityManager.createNativeQuery("select * from sessions WHERE film in (select id from films WHERE title = ?)", Session.class)
 //                .setParameter(1, filmName).getResultList();
-        return getSessions().stream().filter(cinemaSession -> cinemaSession.getFilm().getTitle().toLowerCase().contains(filmName.toLowerCase(Locale.ROOT))).collect(Collectors.toList());
+        return getSessions().stream().filter(cinemaSession -> cinemaSession.getFilm().getTitle().toLowerCase()
+                .contains(filmName.toLowerCase(Locale.ROOT))).collect(Collectors.toList());
     }
 }

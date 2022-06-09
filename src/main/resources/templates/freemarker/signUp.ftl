@@ -69,7 +69,7 @@
     <div class="form">
         <form class="register-form" action="signUp" method="POST">
             <input name="firstName" type="text" placeholder="name"/>
-            <input name="firstName" type="text" placeholder="last name"/>
+            <input name="lastName" type="text" placeholder="last name"/>
             <input name="password" type="password" placeholder="password"/>
             <input type="tel" name="phoneNumber" placeholder="phone number"/>
             <button type="submit" value="Sign up">create</button>
