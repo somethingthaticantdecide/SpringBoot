@@ -8,9 +8,12 @@ import edu.school21.cinema.services.FilmService;
 import edu.school21.cinema.services.HallsService;
 import edu.school21.cinema.services.ImagesService;
 import edu.school21.cinema.services.SessionService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.apache.commons.io.FilenameUtils;
@@ -56,18 +59,23 @@ public class adminPanelController {
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
+            String resultFileName;
             if (file.getSize() > 0) {
                 String uuidFile = UUID.nameUUIDFromBytes(file.getBytes()).toString();
-                String resultFileName = uuidFile + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+                resultFileName = uuidFile + "." + FilenameUtils.getExtension(file.getOriginalFilename());
                 file.transferTo(new File(uploadPath + "/" + resultFileName));
-
-                Image image = new Image();
-                image.setFilename(resultFileName);
-                image.setSize(file.getSize());
-                image.setMime(file.getContentType());
-                imagesService.add(image);
-                film.setPoster(image);
+            } else {
+                resultFileName = "poster-holder.jpg";
+                File oldFile = new ClassPathResource("/images/" + resultFileName).getFile();
+                File newFile = new File(uploadPath + "/" + resultFileName);
+                FileCopyUtils.copy(oldFile, newFile);
             }
+            Image image = new Image();
+            image.setFilename(resultFileName);
+            image.setSize(file.getSize());
+            image.setMime(file.getContentType());
+            imagesService.add(image);
+            film.setPoster(image);
             filmService.add(film);
         }
         return "redirect:/admin/panel/films";

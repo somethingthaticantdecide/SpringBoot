@@ -36,14 +36,9 @@ public class imagesController {
         try {
             Image image = imagesService.getImageByName(name);
             byte[] bytes = FileUtils.readFileToByteArray(new File(uploadPath + "/" + image.getFilename()));
-            return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(bytes);
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);
         } catch (IOException e) {
-            return ResponseEntity
-                    .notFound()
-                    .build();
+            return ResponseEntity.notFound().build();
         }
     }
 }

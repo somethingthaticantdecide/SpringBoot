@@ -33,9 +33,8 @@ public class ImagesRepositoryImpl implements ImagesRepository {
 
     @Override
     public Image getImageByName(String name) {
-//        return entityManager.createQuery("from Image where filename=" + name, Image.class).getSingleResult();
         TypedQuery<Image> typedQuery = entityManager.createQuery(" from Image where filename=:name", Image.class);
         typedQuery.setParameter("name", name);
-        return typedQuery.getSingleResult();
+        return typedQuery.getResultList().get(0);
     }
 }

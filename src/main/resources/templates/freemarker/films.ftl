@@ -72,7 +72,11 @@
 				<td>${film.year}</td>
 				<td>${film.age}</td>
 				<td>${film.description}</td>
-				<td><img src="/images/${film.poster.filename}" style="height: 100px; width: 150px;" alt="/images/poster-holder.jpg"></td>
+				<#if film.poster??>
+					<td><img src="/images/${film.poster.filename}" style="height: 100px; width: 150px;" alt="/images/poster-holder.jpg"></td>
+				<#else>
+					<td><img src="/images/poster-holder.jpg" style="height: 100px; width: 150px;" alt=""></td>
+				</#if>
 			</tr>
 		</#list>
 	</table>
