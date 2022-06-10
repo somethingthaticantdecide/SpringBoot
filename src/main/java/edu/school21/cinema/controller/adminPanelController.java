@@ -8,7 +8,6 @@ import edu.school21.cinema.services.FilmService;
 import edu.school21.cinema.services.HallsService;
 import edu.school21.cinema.services.ImagesService;
 import edu.school21.cinema.services.SessionService;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -16,10 +15,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.io.FilenameUtils;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/panel")
@@ -29,7 +27,6 @@ public class adminPanelController {
     private final HallsService hallsService;
     private final SessionService sessionService;
     private final ImagesService imagesService;
-
     private final String uploadPath;
 
     @Autowired
@@ -55,15 +52,9 @@ public class adminPanelController {
     @PostMapping(value = "/films/add", consumes = "multipart/form-data")
     public String addFilm(@ModelAttribute("film") Film film, @RequestParam("file") MultipartFile file) throws IOException {
         if (null != film && !film.getTitle().isEmpty()) {
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
             String resultFileName;
             if (file.getSize() > 0) {
-                String uuidFile = UUID.nameUUIDFromBytes(file.getBytes()).toString();
-                resultFileName = uuidFile + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-                file.transferTo(new File(uploadPath + "/" + resultFileName));
+                resultFileName = imagesService.uploadFile(file);
             } else {
                 resultFileName = "poster-holder.jpg";
                 File oldFile = new ClassPathResource("/images/" + resultFileName).getFile();

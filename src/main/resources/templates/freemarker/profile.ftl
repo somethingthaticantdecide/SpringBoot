@@ -30,22 +30,26 @@
     }
 </style>
 <body>
-<#--<img id="avatar" src="/images/${avatar.filename}" height="128" width="128">-->
+<#if avatar??>
+    <img id="avatar" src="/images/${avatar.filename}" height="128" width="128">
+</#if>
 <table id="sessions" border="1">
     <thead>
-    <tr>
-        <td width="200px">Data</td>
-        <td width="250px">Time</td>
-        <td width="200px">Ip</td>
-    </tr>
-    </thead>
-    <#list user.sessions as session>
         <tr>
-            <td>${session.date}</td>
-            <td>${session.time}</td>
-            <td>${session.ip}</td>
+            <td width="200px">Data</td>
+            <td width="250px">Time</td>
+            <td width="200px">Ip</td>
         </tr>
-    </#list>
+    </thead>
+    <#if user.sessions??>
+        <#list user.sessions as session>
+            <tr>
+                <td>${session.date}</td>
+                <td>${session.time}</td>
+                <td>${session.ip}</td>
+            </tr>
+        </#list>
+    </#if>
 </table>
 
 <form id="upload" method="POST" action="upload" enctype="multipart/form-data" >
@@ -63,13 +67,15 @@
         <td width="150px">MIME</td>
     </tr>
     </thead>
-    <#list user.images as image>
-        <tr>
-            <td><a href="images/${image.filename}">${image.filename}</a></td>
-            <td>${image.size}</td>
-            <td>${image.mime}</td>
-        </tr>
-    </#list>
+    <#if user.images??>
+        <#list user.images as image>
+            <tr>
+                <td><a href="images/${image.filename}">${image.filename}</a></td>
+                <td>${image.size}</td>
+                <td>${image.mime}</td>
+            </tr>
+        </#list>
+    </#if>
 </table>
 </body>
 </html>

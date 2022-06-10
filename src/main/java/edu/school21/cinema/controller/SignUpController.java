@@ -42,8 +42,8 @@ public class SignUpController {
         user.setPassword(req.getParameter("password"));
         user.setAvatars(new ArrayList<>());
         user.setSessions(new ArrayList<>());
-        user.getSessions().add(new UserSession(user, ZonedDateTime.now().toLocalDate().toString(), ZonedDateTime.now().toLocalTime().toString(), req.getRemoteAddr()));
         usersService.add(user);
+        user.getSessions().add(new UserSession(user, ZonedDateTime.now().toLocalDate().toString(), ZonedDateTime.now().toLocalTime().toString(), req.getRemoteAddr()));
         return "redirect:/sessions";
     }
 
