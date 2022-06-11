@@ -26,13 +26,13 @@ public class UploadController {
         this.imagesService = imagesService;
     }
 
-    @GetMapping(value = "/halls")
+    @GetMapping()
     public String doGet() {
         return "redirect:/profile";
     }
 
     @PostMapping(consumes = "multipart/form-data")
-    public void doPost(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
+    public String doPost(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
         String username = (String) request.getSession().getAttribute("username");
         String resultFileName = imagesService.uploadFile(file);
 
@@ -40,6 +40,12 @@ public class UploadController {
         image.setFilename(resultFileName);
         image.setSize(file.getSize());
         image.setMime(file.getContentType());
-        usersService.find(username).getAvatars().add(image);
+        imagesService.add(image);
+
+        User user = usersService.find(username);
+        user.getAvatars().add(image);
+        user.setLastName("qwe");
+        usersService.update(user);
+        return "redirect:/profile";
     }
 }

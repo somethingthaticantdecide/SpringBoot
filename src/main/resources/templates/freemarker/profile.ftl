@@ -52,7 +52,7 @@
     </#if>
 </table>
 
-<form id="upload" method="POST" action="upload" enctype="multipart/form-data" >
+<form id="upload" method="POST" action="uploadAvatar" enctype="multipart/form-data" >
     File:
     <input type="file" name="file" id="file" /> <br/>
     <br/>
@@ -61,14 +61,14 @@
 
 <table id="images" border="1">
     <thead>
-    <tr>
-        <td width="450px">File name</td>
-        <td width="150px">Size</td>
-        <td width="150px">MIME</td>
-    </tr>
+        <tr>
+            <td width="450px">File name</td>
+            <td width="150px">Size</td>
+            <td width="150px">MIME</td>
+        </tr>
     </thead>
-    <#if user.images??>
-        <#list user.images as image>
+    <#if user.avatars??>
+        <#list user.avatars as image>
             <tr>
                 <td><a href="images/${image.filename}">${image.filename}</a></td>
                 <td>${image.size}</td>

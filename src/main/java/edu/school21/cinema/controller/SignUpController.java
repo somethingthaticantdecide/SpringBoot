@@ -2,6 +2,7 @@ package edu.school21.cinema.controller;
 
 import edu.school21.cinema.model.User;
 import edu.school21.cinema.model.UserSession;
+import edu.school21.cinema.services.UserSessionService;
 import edu.school21.cinema.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,19 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/signUp")
 public class SignUpController {
 
     private final UsersService usersService;
+    private final UserSessionService userSessionService;
 
     @Autowired
-    public SignUpController(UsersService usersService) {
+    public SignUpController(UsersService usersService, UserSessionService userSessionService) {
         this.usersService = usersService;
+        this.userSessionService = userSessionService;
     }
 
     @GetMapping
@@ -35,6 +38,7 @@ public class SignUpController {
         String firstName = req.getParameter("firstName");
         if (usersService.find(firstName) != null)
             return "signUp";
+
         User user = new User();
         user.setFirstname(firstName);
         user.setLastName(req.getParameter("lastName"));
@@ -43,6 +47,14 @@ public class SignUpController {
         user.setAvatars(new ArrayList<>());
         user.setSessions(new ArrayList<>());
         usersService.add(user);
+
+        UserSession userSession = new UserSession();
+        userSession.setUser(user);
+        userSession.setIp(req.getRemoteAddr());
+        userSession.setDate(LocalDateTime.now().toLocalDate().toString());
+        userSession.setTime(LocalDateTime.now().toLocalTime().toString());
+        userSessionService.add(userSession);
+
         user.getSessions().add(new UserSession(user, ZonedDateTime.now().toLocalDate().toString(), ZonedDateTime.now().toLocalTime().toString(), req.getRemoteAddr()));
         return "redirect:/sessions";
     }

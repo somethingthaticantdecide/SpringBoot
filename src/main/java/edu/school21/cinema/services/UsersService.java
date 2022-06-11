@@ -22,8 +22,7 @@ public class UsersService {
         return usersRepository.find(username);
     }
 
-    public boolean authorize(String username, String password) {
-        User user = usersRepository.find(username);
-        return user != null && Objects.equals(user.getPassword(), password);
+    public void update(User user) {
+        usersRepository.update(user);
     }
 }

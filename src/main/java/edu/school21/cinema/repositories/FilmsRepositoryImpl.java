@@ -18,7 +18,7 @@ public class FilmsRepositoryImpl implements FilmsRepository {
 
     @Override
     public void add(Film film) {
-        entityManager.merge(film);
+        entityManager.persist(film);
     }
 
     @Override

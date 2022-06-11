@@ -30,4 +30,9 @@ public class UsersRepositoryImpl implements UsersRepository {
                 .setParameter("firstName", firstname).getResultList()
                 .stream().findFirst().orElse(null);
     }
+
+    @Override
+    public void update(User user) {
+        entityManager.merge(user);
+    }
 }

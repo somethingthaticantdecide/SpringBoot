@@ -9,4 +9,6 @@ public interface UsersRepository {
     void save(String firstName, String lastName, String phone, String password);
 
     User find(String username);
+
+    void update(User user);
 }
