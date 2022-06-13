@@ -46,16 +46,13 @@ public class SignUpController {
         user.setPassword(req.getParameter("password"));
         user.setAvatars(new ArrayList<>());
         user.setSessions(new ArrayList<>());
-        usersService.add(user);
 
-        UserSession userSession = new UserSession();
-        userSession.setUser(user);
-        userSession.setIp(req.getRemoteAddr());
-        userSession.setDate(LocalDateTime.now().toLocalDate().toString());
-        userSession.setTime(LocalDateTime.now().toLocalTime().toString());
+        UserSession userSession = userSessionService.createSession(user, req.getRemoteAddr());
         userSessionService.add(userSession);
 
-        user.getSessions().add(new UserSession(user, ZonedDateTime.now().toLocalDate().toString(), ZonedDateTime.now().toLocalTime().toString(), req.getRemoteAddr()));
+        user.getSessions().add(userSession);
+        usersService.add(user);
+
         return "redirect:/sessions";
     }
 

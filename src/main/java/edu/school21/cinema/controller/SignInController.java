@@ -38,12 +38,12 @@ public class SignInController {
         User user = usersService.find(username);
         if (user != null && Objects.equals(user.getPassword(), request.getParameter("password"))) {
             request.getSession().setAttribute("username", username);
-            UserSession userSession = new UserSession();
-            userSession.setUser(user);
-            userSession.setIp(request.getRemoteAddr());
-            userSession.setDate(LocalDateTime.now().toLocalDate().toString());
-            userSession.setTime(LocalDateTime.now().toLocalTime().toString());
+
+            UserSession userSession = userSessionService.createSession(user, request.getRemoteAddr());
             userSessionService.add(userSession);
+
+            user.getSessions().add(userSession);
+            usersService.update(user);
             return username.equals("admin") ? "redirect:/admin/panel" : "redirect:/sessions";
         }
         return "signIn";

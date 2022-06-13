@@ -5,6 +5,8 @@ import edu.school21.cinema.model.UserSession;
 import edu.school21.cinema.repositories.UserSessionRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserSessionService {
     private final UserSessionRepository userSessionRepository;
@@ -15,5 +17,15 @@ public class UserSessionService {
 
     public void add(UserSession userSession)  {
         userSessionRepository.add(userSession);
+    }
+
+    public UserSession createSession(User user, String remoteAddr)  {
+        UserSession userSession = new UserSession();
+        userSession.setUser(user);
+        userSession.setIp(remoteAddr);
+        userSession.setDate(LocalDateTime.now().toLocalDate().toString());
+        userSession.setTime(LocalDateTime.now().toLocalTime().toString());
+
+        return userSession;
     }
 }
