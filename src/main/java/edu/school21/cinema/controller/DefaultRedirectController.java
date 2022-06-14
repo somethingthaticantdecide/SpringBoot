@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller("/redirect")
+@Controller
 public class DefaultRedirectController {
-    @GetMapping
+    @GetMapping("/default")
     public String defaultAfterLogin(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin/";

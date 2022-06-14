@@ -14,26 +14,40 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/profile", "/profile/**").hasAnyRole("ADMIN", "USER")
-                //Доступ разрешен всем пользователей
-                .antMatchers("/", "/img/**", "/js/**", "/css/**", "/sessions/**", "/films", "/films/**/image").authenticated()
-                .antMatchers("/signUp").permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                .loginPage("/signIn")
-                .defaultSuccessUrl("/redirect")
-                .and()
-            .logout()
-                .logoutUrl("/logout")
-                .clearAuthentication(true)
-                .invalidateHttpSession(true)
-                .permitAll()
-                .logoutSuccessUrl("/");
+                .antMatchers("/", "/images/**", "/sessions/**", "/films").authenticated()
+                .antMatchers("/signUp", "/signIn").permitAll();
         return http.build();
     }
+
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//            .authorizeRequests()
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/profile", "/profile/**").hasAnyRole("ADMIN", "USER")
+//                .antMatchers("/", "/images/**", "/sessions/**", "/films").authenticated()
+//                .antMatchers("/signUp", "/signIn").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//            .formLogin()
+//                .defaultSuccessUrl("/default")
+//                .loginPage("/")
+//                .failureUrl("/")
+//                .and()
+//            .logout()
+//                .logoutUrl("/logout")
+//                .clearAuthentication(true)
+//                .invalidateHttpSession(true)
+//                .permitAll()
+//                .logoutSuccessUrl("/")
+//                .and()
+//            .rememberMe()
+//                .tokenValiditySeconds(3600);
+//        return http.build();
+//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
