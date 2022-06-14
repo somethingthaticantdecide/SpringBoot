@@ -14,27 +14,20 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .cors().disable()
-                .authorizeRequests()
-                //Доступ только для пользователей с ролью Администратор
+            .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/auth/profile", "/auth/profile/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/profile", "/profile/**").hasAnyRole("ADMIN", "USER")
                 //Доступ разрешен всем пользователей
-                .antMatchers("/", "/img/**", "/js/**", "/css/**", "/sessions/**", "/films", "/films/**/image").permitAll()
-                .antMatchers("/auth/register").permitAll()
-                //Все остальные страницы требуют аутентификации
+                .antMatchers("/", "/img/**", "/js/**", "/css/**", "/sessions/**", "/films", "/films/**/image").authenticated()
+                .antMatchers("/signUp").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                //Настройка для входа в систему
-                .formLogin()
-                .loginPage("/auth/login")
-                //Перенарпавление на главную страницу после успешного входа
-                .defaultSuccessUrl("/auth/profile")
-                .permitAll()
+            .formLogin()
+                .loginPage("/signIn")
+                .defaultSuccessUrl("/redirect")
                 .and()
-                .logout()
-                .logoutUrl("/auth/logout")
+            .logout()
+                .logoutUrl("/logout")
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .permitAll()
