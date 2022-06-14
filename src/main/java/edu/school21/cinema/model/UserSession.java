@@ -9,12 +9,8 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Table
-public class UserSession {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserSession extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn

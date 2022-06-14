@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CinemaDataConfig {
+public class DataConfig {
     @Value("${uploadPath}")
     private String path;
 

@@ -11,28 +11,9 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Table(name = "halls")
-public class Hall {
+public class Hall extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "seats")
     private int seats;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Hall hall = (Hall) o;
-        return id == hall.id && seats == hall.seats && Objects.equals(name, hall.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, seats);
-    }
 }

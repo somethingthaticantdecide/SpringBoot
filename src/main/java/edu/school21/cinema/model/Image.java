@@ -9,17 +9,10 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @Table(name = "images")
-public class Image {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Image extends AbstractEntity {
 
-    @Column(name = "filename")
     private String filename;
-
-    @Column(name = "size")
     private Long size;
-
-    @Column(name = "mime")
     private String mime;
+
 }

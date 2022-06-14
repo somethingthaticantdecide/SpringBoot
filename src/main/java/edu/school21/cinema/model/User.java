@@ -10,22 +10,11 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "firstname")
     private String firstname;
-
-    @Column(name = "lastname")
     private String lastName;
-
-    @Column(name = "phone")
     private String phoneNumber;
-
-    @Column(name = "password")
     private String password;
 
     @OneToMany
