@@ -1,5 +1,6 @@
 package edu.school21.cinema.model;
 
+import edu.school21.cinema.enums.Role;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
@@ -24,6 +25,9 @@ public class User extends AbstractEntity {
     @OneToMany
     @ToString.Exclude
     private List<UserSession> sessions;
+
+    @Enumerated(EnumType.STRING)
+    private Role roles;
 
     public User(String firstName, String lastName, String phoneNumber, String password) {
         this.firstname = firstName;
