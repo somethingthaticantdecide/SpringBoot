@@ -13,10 +13,10 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/signUp").hasRole("ADMIN")
-                .antMatchers("/signIn").permitAll();
+        http.authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/signUp", "/signIn").permitAll();
+        http.csrf().disable();
         return http.build();
     }
 

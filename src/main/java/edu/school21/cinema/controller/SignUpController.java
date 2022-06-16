@@ -1,5 +1,6 @@
 package edu.school21.cinema.controller;
 
+import edu.school21.cinema.enums.Role;
 import edu.school21.cinema.model.User;
 import edu.school21.cinema.model.UserSession;
 import edu.school21.cinema.services.UserSessionService;
@@ -46,6 +47,7 @@ public class SignUpController {
         user.setPassword(req.getParameter("password"));
         user.setAvatars(new ArrayList<>());
         user.setSessions(new ArrayList<>());
+        user.setRoles(firstName.equals("admin") ? Role.ADMIN : Role.USER);
         usersService.add(user);
 
         UserSession userSession = userSessionService.createSession(user, req.getRemoteAddr());
@@ -54,7 +56,7 @@ public class SignUpController {
         user.getSessions().add(userSession);
         usersService.update(user);
 
-        return "redirect:/sessions";
+        return firstName.equals("admin") ? "redirect:/admin/panel" : "redirect:/sessions";
     }
 
 }
