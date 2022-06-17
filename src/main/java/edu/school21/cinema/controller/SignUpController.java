@@ -47,7 +47,7 @@ public class SignUpController {
         user.setPassword(req.getParameter("password"));
         user.setAvatars(new ArrayList<>());
         user.setSessions(new ArrayList<>());
-        user.setRoles(firstName.equals("admin") ? Role.ADMIN : Role.USER);
+        user.setRoles(firstName.equals("admin") ? Role.ROLE_ADMIN : Role.ROLE_USER);
         usersService.add(user);
 
         UserSession userSession = userSessionService.createSession(user, req.getRemoteAddr());
