@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 @Controller
@@ -47,7 +45,7 @@ public class SignUpController {
         user.setPassword(req.getParameter("password"));
         user.setAvatars(new ArrayList<>());
         user.setSessions(new ArrayList<>());
-        user.setRoles(firstName.equals("admin") ? Role.ROLE_ADMIN : Role.ROLE_USER);
+        user.setRole(firstName.equals("admin") ? Role.ROLE_ADMIN : Role.ROLE_USER);
         usersService.add(user);
 
         UserSession userSession = userSessionService.createSession(user, req.getRemoteAddr());

@@ -3,11 +3,9 @@ package edu.school21.cinema.model;
 import edu.school21.cinema.enums.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +32,7 @@ public class User extends AbstractEntity implements UserDetails {
     private List<UserSession> sessions;
 
     @Enumerated(EnumType.STRING)
-    private Role roles;
+    private Role role;
 
     public User(String firstName, String lastName, String phoneNumber, String password) {
         this.firstname = firstName;
@@ -45,7 +43,11 @@ public class User extends AbstractEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(roles);
+        return Collections.singleton(role);
+
+//        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+//        list.add(new SimpleGrantedAuthority(ROLE_PREFIX + roles));
+//        return list;
     }
 
     @Override
