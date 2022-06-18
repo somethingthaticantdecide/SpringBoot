@@ -13,39 +13,14 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/signUp", "/signIn").permitAll();
+//        http.authorizeRequests()
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/signUp", "/signIn").permitAll();
         http.csrf().disable();
+        http.authorizeRequests()
+                .antMatchers("/*").permitAll();
         return http.build();
     }
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/profile", "/profile/**").hasAnyRole("ADMIN", "USER")
-//                .antMatchers("/", "/images/**", "/sessions/**", "/films").authenticated()
-//                .antMatchers("/signUp", "/signIn").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//            .formLogin()
-//                .defaultSuccessUrl("/default")
-//                .loginPage("/")
-//                .failureUrl("/")
-//                .and()
-//            .logout()
-//                .logoutUrl("/logout")
-//                .clearAuthentication(true)
-//                .invalidateHttpSession(true)
-//                .permitAll()
-//                .logoutSuccessUrl("/")
-//                .and()
-//            .rememberMe()
-//                .tokenValiditySeconds(3600);
-//        return http.build();
-//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

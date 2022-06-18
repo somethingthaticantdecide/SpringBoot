@@ -12,7 +12,4 @@ public interface UserSessionRepository {
 
     List<UserSession> getSessions();
 
-    List<UserSession> getSessionsByUser(User user);
-
-    Session getSessionById(Integer id);
 }

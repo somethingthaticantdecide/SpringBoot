@@ -59,7 +59,7 @@
         -moz-osx-font-smoothing: grayscale;
     }
 </style>
-<html lang="ru">
+<html lang="ru" >
 <body>
 <div class="login-page">
     <div class="form">

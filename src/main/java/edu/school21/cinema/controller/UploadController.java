@@ -3,10 +3,9 @@ package edu.school21.cinema.controller;
 import edu.school21.cinema.model.Image;
 import edu.school21.cinema.model.User;
 import edu.school21.cinema.services.ImagesService;
-import edu.school21.cinema.services.UsersService;
+import edu.school21.cinema.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,12 +16,12 @@ import java.io.*;
 @RequestMapping("/uploadAvatar")
 public class UploadController {
 
-    private final UsersService usersService;
+    private final UserService userService;
     private final ImagesService imagesService;
 
     @Autowired
-    public UploadController(UsersService usersService, ImagesService imagesService) {
-        this.usersService = usersService;
+    public UploadController(UserService userService, ImagesService imagesService) {
+        this.userService = userService;
         this.imagesService = imagesService;
     }
 
@@ -42,10 +41,9 @@ public class UploadController {
         image.setMime(file.getContentType());
         imagesService.add(image);
 
-        User user = usersService.find(username);
+        User user = userService.find(username);
         user.getAvatars().add(image);
-        user.setLastName("qwe");
-        usersService.update(user);
+        userService.save(user);
         return "redirect:/profile";
     }
 }

@@ -3,7 +3,7 @@ package edu.school21.cinema.controller;
 import edu.school21.cinema.model.Image;
 import edu.school21.cinema.model.User;
 import edu.school21.cinema.services.ImagesService;
-import edu.school21.cinema.services.UsersService;
+import edu.school21.cinema.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -21,20 +21,20 @@ import java.util.List;
 @RequestMapping("/profile")
 public class profileController {
 
-    private final UsersService usersService;
+    private final UserService userService;
     private final ImagesService imagesService;
     private final String uploadPath;
 
     @Autowired
-    public profileController(UsersService usersService, ImagesService imagesService, String uploadPath) {
-        this.usersService = usersService;
+    public profileController(UserService userService, ImagesService imagesService, String uploadPath) {
+        this.userService = userService;
         this.imagesService = imagesService;
         this.uploadPath = uploadPath;
     }
 
     @GetMapping
     public String doGet(ModelMap model, HttpServletRequest request) throws IOException {
-        User user = usersService.find((String) request.getSession().getAttribute("username"));
+        User user = userService.find((String) request.getSession().getAttribute("username"));
         model.addAttribute("user", user);
         List<Image> userAvatars = user.getAvatars();
         if (userAvatars.size() > 0) {

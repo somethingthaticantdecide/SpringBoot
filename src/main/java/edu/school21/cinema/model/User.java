@@ -3,11 +3,12 @@ package edu.school21.cinema.model;
 import edu.school21.cinema.enums.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,14 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @Table(name = "users")
-public class User extends AbstractEntity implements UserDetails {
+public class User implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
 
     private String firstname;
     private String lastName;
@@ -32,7 +40,7 @@ public class User extends AbstractEntity implements UserDetails {
     private List<UserSession> sessions;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role roles;
 
     public User(String firstName, String lastName, String phoneNumber, String password) {
         this.firstname = firstName;
@@ -43,11 +51,10 @@ public class User extends AbstractEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(role);
-
-//        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-//        list.add(new SimpleGrantedAuthority(ROLE_PREFIX + roles));
-//        return list;
+//        return Collections.singleton(role);
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+        list.add(new SimpleGrantedAuthority(roles.name()));
+        return list;
     }
 
     @Override
@@ -74,4 +81,24 @@ public class User extends AbstractEntity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (this.id == null || obj == null || !(this.getClass().equals(obj.getClass()))) {
+            return false;
+        }
+        User that = (User) obj;
+        return this.id.equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return id == null ? 0 : id.hashCode();
+    }
+
 }
