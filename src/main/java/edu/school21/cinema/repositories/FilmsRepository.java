@@ -10,7 +10,5 @@ public interface FilmsRepository {
 
     List<Film> getFilms();
 
-    Film getByTitle(String filmName);
-
     Film getFilmById(Integer getFilmById);
 }

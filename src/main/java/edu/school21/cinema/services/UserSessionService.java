@@ -16,7 +16,7 @@ public class UserSessionService {
     }
 
     public void add(UserSession userSession)  {
-        userSessionRepository.add(userSession);
+        userSessionRepository.save(userSession);
     }
 
     public UserSession createSession(User user, String remoteAddr)  {

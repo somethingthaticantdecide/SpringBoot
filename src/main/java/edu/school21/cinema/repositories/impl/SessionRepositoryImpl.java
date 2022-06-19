@@ -1,6 +1,7 @@
-package edu.school21.cinema.repositories;
+package edu.school21.cinema.repositories.impl;
 
 import edu.school21.cinema.model.Session;
+import edu.school21.cinema.repositories.SessionRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -28,16 +29,7 @@ public class SessionRepositoryImpl implements SessionRepository {
     }
 
     @Override
-    public Session getSessionById(Integer id) {
-        return entityManager.find(Session.class, id);
-    }
-
-    @Override
     public List<Session> getSessions(String filmName) {
-//        entityManager.createQuery("from Session WHERE film=:film", Session.class)
-//                .setParameter("film", getByTitle(filmName)).getResultList();
-//        entityManager.createNativeQuery("select * from sessions WHERE film in (select id from films WHERE title = ?)", Session.class)
-//                .setParameter(1, filmName).getResultList();
         return getSessions().stream().filter(cinemaSession -> cinemaSession.getFilm().getTitle().toLowerCase()
                 .contains(filmName.toLowerCase(Locale.ROOT))).collect(Collectors.toList());
     }

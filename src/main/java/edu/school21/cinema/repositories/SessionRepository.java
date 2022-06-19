@@ -2,7 +2,6 @@ package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.model.Session;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface SessionRepository {
@@ -13,5 +12,4 @@ public interface SessionRepository {
 
     List<Session> getSessions(String filmName);
 
-    Session getSessionById(Integer id);
 }

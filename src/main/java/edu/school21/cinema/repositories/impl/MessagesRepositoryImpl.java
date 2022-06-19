@@ -1,6 +1,7 @@
-package edu.school21.cinema.repositories;
+package edu.school21.cinema.repositories.impl;
 
 import edu.school21.cinema.model.OutputMessage;
+import edu.school21.cinema.repositories.MessagesRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

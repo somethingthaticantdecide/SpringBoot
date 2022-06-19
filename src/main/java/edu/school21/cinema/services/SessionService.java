@@ -26,8 +26,4 @@ public class SessionService {
         return sessionRepository.getSessions(filmName);
     }
 
-    public Session getSessionById(Integer id){
-        return sessionRepository.getSessionById(id);
-    }
-
 }

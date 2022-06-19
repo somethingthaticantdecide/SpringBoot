@@ -1,11 +1,11 @@
-package edu.school21.cinema.repositories;
+package edu.school21.cinema.repositories.impl;
 
 import edu.school21.cinema.model.Film;
+import edu.school21.cinema.repositories.FilmsRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -24,13 +24,6 @@ public class FilmsRepositoryImpl implements FilmsRepository {
     @Override
     public List<Film> getFilms() {
         return entityManager.createQuery(" from Film ", Film.class).getResultList();
-    }
-
-    @Override
-    public Film getByTitle(String filmName) {
-        TypedQuery<Film> typedQuery = entityManager.createQuery(" FROM Film f WHERE f.title=:title", Film.class);
-        typedQuery.setParameter("title", filmName);
-        return typedQuery.getSingleResult();
     }
 
     @Override

@@ -1,15 +1,7 @@
 package edu.school21.cinema.repositories;
 
-import edu.school21.cinema.model.Session;
-import edu.school21.cinema.model.User;
 import edu.school21.cinema.model.UserSession;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface UserSessionRepository {
-
-    void add(UserSession session);
-
-    List<UserSession> getSessions();
-
+public interface UserSessionRepository extends JpaRepository<UserSession, Long> {
 }
