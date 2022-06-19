@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User find(String username)  {
-        return userRepository.findByUsername(username);
+        return userRepository.findByFirstname(username);
     }
 
     public void update(User user) {
@@ -35,11 +35,11 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        return userRepository.findByFirstname(username);
     }
 
     public boolean saveUser(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+        User userFromDB = userRepository.findByFirstname(user.getFirstname());
         if (userFromDB != null) {
             return false;
         }

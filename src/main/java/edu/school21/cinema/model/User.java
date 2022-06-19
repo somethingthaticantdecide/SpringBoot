@@ -9,9 +9,10 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @ToString
 @Table(name = "users")
 public class User implements UserDetails {
@@ -19,7 +20,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String username;
+    private String firstname;
     private String lastName;
     private String phoneNumber;
     private String password;
@@ -39,19 +40,6 @@ public class User implements UserDetails {
     private Role roles;
 
     public User() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override
@@ -74,13 +62,9 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        return Collections.singleton(roles);
     }
 
     @Override
@@ -88,27 +72,9 @@ public class User implements UserDetails {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return firstname;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
-
-    public Set<Role> getRoles() {
-        return Collections.singleton(roles);
-    }
-
-    public void setRoles(Role roles) {
-        this.roles = roles;
-    }
-
-    public List<Image> getAvatars() {
-        return avatars;
-    }
 }

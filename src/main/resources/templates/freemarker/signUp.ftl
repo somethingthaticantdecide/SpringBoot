@@ -68,7 +68,7 @@
 <div class="login-page">
     <div class="form">
         <form class="register-form" action="signUp" method="POST">
-            <input name="username" type="text" placeholder="name"/>
+            <input name="firstname" type="text" placeholder="name"/>
             <input name="lastName" type="text" placeholder="last name"/>
             <input name="password" type="password" placeholder="password"/>
             <input type="tel" name="phoneNumber" placeholder="phone number"/>

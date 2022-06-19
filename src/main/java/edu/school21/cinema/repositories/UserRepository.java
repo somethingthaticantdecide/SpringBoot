@@ -4,5 +4,5 @@ import edu.school21.cinema.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+    User findByFirstname(String username);
 }
