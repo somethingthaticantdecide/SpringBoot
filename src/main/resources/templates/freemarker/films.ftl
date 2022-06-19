@@ -1,42 +1,7 @@
 <html lang="ru">
-<head><title>Films</title>
-	<style>
-		/*body {*/
-		/*	background: #eeeae5;*/
-		/*}*/
-
-		h2 {
-			margin-bottom: 50px;
-		}
-
-		.container {
-			text-align: center;
-			overflow: hidden;
-			width: 800px;
-			margin: 0 auto;
-		}
-
-		.container table {
-			width: 100%;
-		}
-
-		.container td, .container th {
-			padding: 10px;
-		}
-
-		.container td:first-child, .container th:first-child {
-			padding-left: 20px;
-		}
-
-		.container td:last-child, .container th:last-child {
-			padding-right: 20px;
-		}
-
-		.container th {
-			border-bottom: 1px solid #ddd;
-			position: relative;
-		}
-	</style>
+<head>
+	<link href="/css/admin.css" rel="stylesheet" type="text/css">
+</head>
 <body>
 <div id="header">
 	<H2>Add Films</H2>
