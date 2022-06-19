@@ -3,33 +3,29 @@ package edu.school21.cinema.model;
 import edu.school21.cinema.enums.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 @ToString
-@NoArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
-
-    private String firstname;
+    private String username;
     private String lastName;
     private String phoneNumber;
     private String password;
+
+    @Transient
+    private String passwordConfirm;
 
     @OneToMany
     @ToString.Exclude
@@ -42,24 +38,20 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role roles;
 
-    public User(String firstName, String lastName, String phoneNumber, String password) {
-        this.firstname = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
+    public User() {
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return Collections.singleton(role);
-        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-        list.add(new SimpleGrantedAuthority(roles.name()));
-        return list;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String getUsername() {
-        return firstname;
+        return username;
     }
 
     @Override
@@ -82,23 +74,41 @@ public class User implements UserDetails {
         return true;
     }
 
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (this.id == null || obj == null || !(this.getClass().equals(obj.getClass()))) {
-            return false;
-        }
-        User that = (User) obj;
-        return this.id.equals(that.getId());
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
-    public int hashCode() {
-        return id == null ? 0 : id.hashCode();
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
     }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public Set<Role> getRoles() {
+        return Collections.singleton(roles);
+    }
+
+    public void setRoles(Role roles) {
+        this.roles = roles;
+    }
+
+    public List<Image> getAvatars() {
+        return avatars;
+    }
 }
