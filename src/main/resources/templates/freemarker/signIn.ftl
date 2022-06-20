@@ -1,6 +1,6 @@
 <#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <title>Sign In</title>
     <link href="/css/login.css" rel="stylesheet" type="text/css">
