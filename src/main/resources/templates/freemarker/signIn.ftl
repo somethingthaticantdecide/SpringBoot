@@ -1,7 +1,8 @@
+<#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
-<html lang="ru" >
+<html lang="ru">
 <head>
-    <title>${.locale}</title>
+    <title><@spring.message "greeting"/></title>
     <link href="/css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
