@@ -1,12 +1,13 @@
+<link href="/css/admin.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-	<link href="/css/admin.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 <div id="header">
 	<H2>Add Films</H2>
 </div>
-
 <div class="container">
 	<fieldset>
 		<legend>Add Film</legend>

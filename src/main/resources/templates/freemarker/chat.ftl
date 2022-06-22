@@ -1,20 +1,20 @@
+<link href="/css/chat.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/js/chat.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript">
+	function sendMessage() {
+		var author = "${author}";
+		var btnInput = document.getElementById('btn-input');
+		stompClient.send("/app/chat", {}, JSON.stringify({'author':author, 'text':btnInput.value, 'film':${film}}));
+		btnInput.value = "";
+	}
+</script>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/css/chat.css" rel="stylesheet" type="text/css">
-	<link href="/js/chat.js" type="text/javascript">
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.0/sockjs.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-	<script type="text/javascript">
-		function sendMessage() {
-			var author = "${author}";
-			var btnInput = document.getElementById('btn-input');
-			stompClient.send("/app/chat", {}, JSON.stringify({'author':author, 'text':btnInput.value, 'film':${film}}));
-			btnInput.value = "";
-		}
-	</script>
 </head>
 <body onload="connect()" onclose="disconnect()">
 <h2>Chat Messages</h2>
@@ -34,7 +34,6 @@
 			<span class=${spanClass}>${message.time}</span>
 		</div>
 	</#list>
-
 </div>
 <div class="input-group">
 	<label for="btn-input"></label>

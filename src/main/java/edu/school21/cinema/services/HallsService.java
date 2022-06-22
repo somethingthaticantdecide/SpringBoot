@@ -22,7 +22,7 @@ public class HallsService {
         hallsRepository.add(hall);
     }
 
-    public Hall getHallById(Integer id){
+    public Hall getHallById(Long id){
         return hallsRepository.getHallById(id);
     }
 }

@@ -27,7 +27,7 @@ public class FilmsRepositoryImpl implements FilmsRepository {
     }
 
     @Override
-    public Film getFilmById(Integer id) {
+    public Film getFilmById(Long id) {
         return entityManager.find(Film.class, id);
     }
 

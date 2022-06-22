@@ -10,6 +10,6 @@ public interface HallsRepository {
 
     List<Hall> getHalls();
 
-    Hall getHallById(Integer id);
+    Hall getHallById(Long id);
 
 }

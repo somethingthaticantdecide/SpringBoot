@@ -1,0 +1,28 @@
+#sessions {
+    margin-top: 150px;
+    width: 32%;
+    overflow-y:scroll;
+    height:200px;
+    display:block;
+    margin-right: 34%;
+    float: right;
+}
+#avatar {
+    margin-top: 200px;
+    margin-left: 500px;
+    margin-right: auto;
+    float: left;
+}
+#upload {
+    margin-left: 500px;
+    margin-right: auto;
+    width: 128px;
+}
+#images {
+    margin-left: 500px;
+    margin-right: auto;
+    width: 39%;
+    overflow-y: scroll;
+    height: 200px;
+    display: block;
+}

@@ -97,8 +97,8 @@ public class adminPanelController {
     @PostMapping(value = "/sessions/add")
     public String addSession(Session session, @ModelAttribute("film_id") String film_id, @ModelAttribute("hall_id") String hall_id) {
         if (session != null) {
-            Film film = filmService.getFilmById(Integer.valueOf(film_id));
-            Hall hall = hallsService.getHallById(Integer.valueOf(hall_id));
+            Film film = filmService.getFilmById(Long.valueOf(film_id));
+            Hall hall = hallsService.getHallById(Long.valueOf(hall_id));
 
             if (hall != null && film != null && !session.getTime().isEmpty()) {
                 session.setHall(hall);

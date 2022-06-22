@@ -1,7 +1,7 @@
+<link href="/css/login.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <head>
     <title>Sign up</title>
-    <link href="/css/login.css" rel="stylesheet" type="text/css">
 </head>
 <html lang="ru">
 <body>

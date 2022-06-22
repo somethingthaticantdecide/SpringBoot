@@ -27,7 +27,7 @@ public class HallsRepositoryImpl implements HallsRepository {
     }
 
     @Override
-    public Hall getHallById(Integer id) {
+    public Hall getHallById(Long id) {
         return entityManager.find(Hall.class, id);
     }
 }

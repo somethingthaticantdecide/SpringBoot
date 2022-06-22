@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 	<link href="/css/admin.css" rel="stylesheet" type="text/css">
@@ -6,7 +7,6 @@
 <div id="header">
 	<H2>Add Hall</H2>
 </div>
-
 <div class="container">
 	<fieldset>
 		<legend>Add Hall</legend>
@@ -16,7 +16,6 @@
 			<input type="submit" value="   Save   " />
 		</form>
 	</fieldset>
-
 	<br/>
 	<table class="order-table">
 		<tr>

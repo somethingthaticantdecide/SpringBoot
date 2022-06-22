@@ -1,6 +1,8 @@
+<link href="/css/admin.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-	<link href="/css/admin.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 <div id="header">
@@ -28,7 +30,6 @@
 			<input type="submit" value="   Save   " />
 		</form>
 	</fieldset>
-
 	<br/>
 	<table class="order-table">
 		<tr>

@@ -1,0 +1,30 @@
+body, input {
+    font-family: Calibri, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+#header h2 {
+    color: #4CAF50;
+    height: 50px;
+    padding: 5px 0 0 5px;
+    font-size: 20px;
+    text-align: center;
+}
+#content {
+    padding: 5px;
+    margin: 5px;
+    text-align: center
+}
+.button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all;
+    transition: all ;
+    cursor: pointer;
+}

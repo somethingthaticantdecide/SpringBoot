@@ -10,5 +10,5 @@ public interface FilmsRepository {
 
     List<Film> getFilms();
 
-    Film getFilmById(Integer getFilmById);
+    Film getFilmById(Long id);
 }

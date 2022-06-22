@@ -1,34 +1,6 @@
-<html>
-<style>
-    #sessions {
-        margin-top: 150px;
-        width: 32%;
-        overflow-y:scroll;
-        height:200px;
-        display:block;
-        margin-right: 34%;
-        float: right;
-    }
-    #avatar {
-        margin-top: 200px;
-        margin-left: 500px;
-        margin-right: auto;
-        float: left;
-    }
-    #upload {
-        margin-left: 500px;
-        margin-right: auto;
-        width: 128px;
-    }
-    #images {
-        margin-left: 500px;
-        margin-right: auto;
-        width: 39%;
-        overflow-y: scroll;
-        height: 200px;
-        display: block;
-    }
-</style>
+<link href="/css/profile.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+<html lang="ru">
 <body>
 <#if avatar??>
     <img id="avatar" src="/images/${avatar.filename}" height="128" width="128">

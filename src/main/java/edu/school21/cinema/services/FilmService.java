@@ -22,7 +22,7 @@ public class FilmService {
         filmsRepository.add(film);
     }
 
-    public Film getFilmById(Integer id){
+    public Film getFilmById(Long id){
         return filmsRepository.getFilmById(id);
     }
 
