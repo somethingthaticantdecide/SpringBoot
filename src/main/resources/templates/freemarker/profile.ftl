@@ -54,7 +54,8 @@
 
 <form id="upload" method="POST" action="uploadAvatar" enctype="multipart/form-data" >
     File:
-    <input type="file" name="file" id="file" /> <br/>
+    <input type="file" name="file" id="file"/>
+    <br/>
     <br/>
     <input type="submit" value="Upload" name="upload"/>
 </form>

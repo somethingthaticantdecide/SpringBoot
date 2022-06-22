@@ -4,9 +4,7 @@
 </head>
 <body>
 <div id="header">
-	<H2>
-		Add Hall
-	</H2>
+	<H2>Add Hall</H2>
 </div>
 
 <div class="container">

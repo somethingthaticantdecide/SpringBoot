@@ -6,7 +6,6 @@
 <div id="header">
 	<H2>Add sessions</H2>
 </div>
-
 <div class="container">
 	<fieldset>
 		<legend>Add Session</legend>
