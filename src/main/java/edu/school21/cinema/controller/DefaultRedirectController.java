@@ -10,8 +10,10 @@ public class DefaultRedirectController {
     @GetMapping("/default")
     public String defaultAfterLogin(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_ADMIN")) {
-            return "redirect:/admin/";
+            return "redirect:/admin/panel";
+        } else if (request.isUserInRole("ROLE_USER")) {
+            return "redirect:/profile";
         }
-        return "redirect:/user/";
+        return "redirect:/signIn";
     }
 }
