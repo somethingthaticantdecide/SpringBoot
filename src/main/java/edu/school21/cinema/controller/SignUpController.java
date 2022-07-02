@@ -41,7 +41,7 @@ public class SignUpController {
         if (bindingResult.hasErrors()) {
             return "signUp";
         }
-//        if (!userForm.getPassword().equals(user.getPasswordConfirm())){
+//        if (!user.getPassword().equals(user.getPasswordConfirm())){
 //            model.addAttribute("passwordError", "Пароли не совпадают");
 //            return "signUp";
 //        }
@@ -49,6 +49,7 @@ public class SignUpController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "signUp";
         }
+
 //        SimpleMailMessage mailMessage = new SimpleMailMessage();
 //        mailMessage.setTo("johntom@yandex.ru");
 //        mailMessage.setSubject("Complete Registration!");

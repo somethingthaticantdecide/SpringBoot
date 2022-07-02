@@ -3,6 +3,7 @@ body, input {
     margin: 0;
     padding: 0;
 }
+
 #header h2 {
     color: #4CAF50;
     height: 50px;
@@ -10,11 +11,13 @@ body, input {
     font-size: 20px;
     text-align: center;
 }
+
 #content {
     padding: 5px;
     margin: 5px;
     text-align: center
 }
+
 .button {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;

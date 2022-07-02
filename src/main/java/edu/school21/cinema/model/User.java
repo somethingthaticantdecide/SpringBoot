@@ -1,6 +1,7 @@
 package edu.school21.cinema.model;
 
 import edu.school21.cinema.enums.Role;
+import edu.school21.cinema.enums.UserStatus;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,6 +39,9 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role roles;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     public User() {
     }
