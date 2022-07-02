@@ -15,6 +15,7 @@
             <input name="passwordConfirm" type="password" placeholder="Confirm password"/>
             <button type="submit" value="Sign up">create</button>
             <p class="message">Already registered? <a href="/signIn">Sign In</a></p>
+            <p class="message">Forgot password? <a href="/password_reset">Reset password</a></p>
         </form>
     </div>
 </div>
