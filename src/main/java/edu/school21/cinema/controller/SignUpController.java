@@ -3,9 +3,6 @@ package edu.school21.cinema.controller;
 import edu.school21.cinema.model.User;
 import edu.school21.cinema.services.EmailSenderService;
 import edu.school21.cinema.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,8 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/signUp")
 public class SignUpController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final EmailSenderService emailSenderService;
+
+    public SignUpController(UserService userService, EmailSenderService emailSenderService) {
+        this.userService = userService;
+        this.emailSenderService = emailSenderService;
+    }
 
     @GetMapping
     public String doGet(HttpServletRequest request) {

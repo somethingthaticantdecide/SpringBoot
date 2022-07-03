@@ -21,7 +21,7 @@ public class chatController {
     }
 
     @GetMapping()
-    public String chat(ModelMap model, @PathVariable("film-id") String film, HttpServletRequest request) {
+    public String chat(ModelMap model, @PathVariable("film-id") String film) {
         model.addAttribute("messages", messagesService.getMessagesByFilmId(film));
         model.addAttribute("film", film);
         model.addAttribute("author", SecurityContextHolder.getContext().getAuthentication().getName());
