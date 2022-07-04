@@ -10,8 +10,8 @@
         <form class="register-form" action="signUp" method="POST">
             <input name="firstname" type="text" placeholder="name"/>
             <input name="lastName" type="text" placeholder="last name"/>
-            <input type="tel" name="phoneNumber" placeholder="phone number"/>
-            <input name="email" type="text" placeholder="Enter your email address"/>
+            <input name="phoneNumber" type="tel" placeholder="phone number"/>
+            <input name="email" type="email" placeholder="Enter your email address"/>
             <input name="password" type="password" placeholder="password"/>
             <input name="passwordConfirm" type="password" placeholder="Confirm password"/>
             <button type="submit">create</button>
