@@ -51,7 +51,8 @@ public class UserService implements UserDetailsService {
         if (userFromDB != null) {
             return false;
         }
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        user.setPassword(user.getPassword());
         if (Objects.equals(user.getFirstname(), "admin")) {
             user.setRoles(Role.ROLE_ADMIN);
             user.setStatus(UserStatus.CONFIRMED);

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/signUp")
@@ -35,8 +36,9 @@ public class SignUpController {
     }
 
     @PostMapping
-    public String addUser(User user, BindingResult bindingResult, Model model) {
+    public String addUser(@Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("passwordError", bindingResult.getAllErrors());
             return "signUp";
         }
         if (!user.getPassword().equals(user.getPasswordConfirm())){

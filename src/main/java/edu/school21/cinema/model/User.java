@@ -1,5 +1,6 @@
 package edu.school21.cinema.model;
 
+import edu.school21.cinema.annotations.ValidPassword;
 import edu.school21.cinema.enums.Role;
 import edu.school21.cinema.enums.UserStatus;
 import lombok.*;
@@ -26,32 +27,23 @@ public class User implements UserDetails {
     private String firstname;
     @NotEmpty
     private String lastName;
-
     private String phoneNumber;
-
     @Email
     @NotEmpty
     private String email;
-
+    @ValidPassword
     private String password;
-
     @Transient
     private String passwordConfirm;
-
     private Boolean activated;
-
-
     @OneToMany
     @ToString.Exclude
     private List<Image> avatars;
-
     @OneToMany
     @ToString.Exclude
     private List<UserSession> sessions;
-
     @Enumerated(EnumType.STRING)
     private Role roles;
-
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
