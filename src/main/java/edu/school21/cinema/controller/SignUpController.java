@@ -37,7 +37,7 @@ public class SignUpController {
     }
 
     @PostMapping
-    public String addUser(@Valid @ModelAttribute("userDetail") User user, BindingResult bindingResult, Model model) {
+    public String addUser(@Valid @ModelAttribute("userDetail") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
 //            model.addAttribute("passwordError", bindingResult.getAllErrors());
             return "signUp";
