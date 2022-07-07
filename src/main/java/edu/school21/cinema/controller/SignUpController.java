@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,17 +37,19 @@ public class SignUpController {
     }
 
     @PostMapping
-    public String addUser(@Valid User user, BindingResult bindingResult, Model model) {
+    public String addUser(@Valid @ModelAttribute("userDetail") User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("passwordError", bindingResult.getAllErrors());
+//            model.addAttribute("passwordError", bindingResult.getAllErrors());
             return "signUp";
         }
         if (!user.getPassword().equals(user.getPasswordConfirm())){
-            model.addAttribute("passwordError", "Пароли не совпадают");
+//            model.addAttribute("passwordError", "Пароли не совпадают");
+            bindingResult.rejectValue("password", "Пароли не совпадают", "Пароли не совпадают");
             return "signUp";
         }
         if (!userService.saveUser(user)){
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+//            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            bindingResult.rejectValue("firstname", "This username already exists", "This username already exists");
             return "signUp";
         }
         return "redirect:/";
