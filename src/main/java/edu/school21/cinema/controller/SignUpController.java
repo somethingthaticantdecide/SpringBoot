@@ -19,11 +19,9 @@ import javax.validation.Valid;
 public class SignUpController {
 
     private final UserService userService;
-    private final EmailSenderService emailSenderService;
 
-    public SignUpController(UserService userService, EmailSenderService emailSenderService) {
+    public SignUpController(UserService userService) {
         this.userService = userService;
-        this.emailSenderService = emailSenderService;
     }
 
     @GetMapping
@@ -39,16 +37,13 @@ public class SignUpController {
     @PostMapping
     public String addUser(@Valid @ModelAttribute("userDetail") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-//            model.addAttribute("passwordError", bindingResult.getAllErrors());
             return "signUp";
         }
         if (!user.getPassword().equals(user.getPasswordConfirm())){
-//            model.addAttribute("passwordError", "Пароли не совпадают");
             bindingResult.rejectValue("password", "Пароли не совпадают", "Пароли не совпадают");
             return "signUp";
         }
         if (!userService.saveUser(user)){
-//            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             bindingResult.rejectValue("firstname", "This username already exists", "This username already exists");
             return "signUp";
         }

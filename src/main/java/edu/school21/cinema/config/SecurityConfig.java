@@ -21,12 +21,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/signUp", "/signIn").permitAll()
-                .antMatchers("/*").permitAll();
-        http
+                .antMatchers("/*").permitAll()
+                .and()
                 .formLogin()
                 .loginPage("/signIn")
                 .defaultSuccessUrl("/sessions")
-                .permitAll();
-        http.csrf().disable();
+                .permitAll()
+                .and()
+                .csrf().disable();
     }
 }
