@@ -1,6 +1,7 @@
 package edu.school21.cinema.model;
 
 import edu.school21.cinema.annotations.ValidPassword;
+import edu.school21.cinema.annotations.PhoneNumber;
 import edu.school21.cinema.enums.Role;
 import edu.school21.cinema.enums.UserStatus;
 import lombok.*;
@@ -27,6 +28,7 @@ public class User implements UserDetails {
     private String firstname;
     @NotEmpty
     private String lastName;
+    @PhoneNumber
     private String phoneNumber;
     @Email
     @NotEmpty
