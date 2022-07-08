@@ -10,16 +10,13 @@
     <div class="form">
         <form class="register-form" action="signUp" method="POST">
             <input name="firstname" type="text" placeholder="name"/>
+
             <input name="lastName" type="text" placeholder="last name"/>
             <input name="phoneNumber" type="tel" placeholder="phone number"/>
             <input name="email" type="email" placeholder="Enter your email address"/>
 
-            <input name="password" type="password" placeholder="password" value="${(user.password)!}" />
-            <#if userDetail??>
-                <@spring.bind "userDetail.password" />
-                <@spring.showErrors "<br>"/>
-            </#if>
-<#--            <input name="password" type="password" placeholder="password"/>-->
+            <@spring.formInput "userDetail.password",'placeholder="password"', "password"/>
+            <@spring.showErrors "<br>"/>
             <input name="passwordConfirm" type="password" placeholder="Confirm password"/>
             <button type="submit">create</button>
             <p class="message">Already registered? <a href="/signIn">Sign In</a></p>

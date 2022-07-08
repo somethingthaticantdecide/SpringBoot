@@ -27,7 +27,7 @@ public class SignUpController {
     }
 
     @GetMapping
-    public String doGet(HttpServletRequest request) {
+    public String doGet(HttpServletRequest request, @ModelAttribute("userDetail") User user) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin/panel";
         } else if (request.isUserInRole("ROLE_USER")) {
