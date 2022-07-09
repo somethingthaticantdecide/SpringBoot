@@ -1,6 +1,6 @@
 package edu.school21.cinema.annotations;
 
-import edu.school21.cinema.validators.PasswordConstraintValidator;
+import edu.school21.cinema.constraints.PasswordConstraintValidator;
 
 import javax.validation.Payload;
 import javax.validation.Constraint;

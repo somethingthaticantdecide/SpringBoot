@@ -37,10 +37,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findByFirstname(username);
     }
 
-    public void update(User user) {
-        userRepository.save(user);
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByFirstname(username);
@@ -51,8 +47,7 @@ public class UserService implements UserDetailsService {
         if (userFromDB != null) {
             return false;
         }
-//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//        user.setPassword(user.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         if (Objects.equals(user.getFirstname(), "admin")) {
             user.setRoles(Role.ROLE_ADMIN);
             user.setStatus(UserStatus.CONFIRMED);
@@ -61,7 +56,7 @@ public class UserService implements UserDetailsService {
             user.setStatus(UserStatus.NOT_CONFIRMED);
         }
         userRepository.save(user);
-        if (!Objects.equals(user.getFirstname(), "admin")) {
+        if (user.getStatus() == UserStatus.NOT_CONFIRMED) {
             sendVerificationEmail(user);
         }
         return true;
@@ -73,7 +68,6 @@ public class UserService implements UserDetailsService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(user.getEmail());
         mailMessage.setSubject("Complete Registration!");
-        mailMessage.setFrom("chand312902@gmail.com");
         mailMessage.setText("To confirm your account, please click here : http://localhost:8080/confirm/"
                 + confirmationToken.getConfirmationToken());
         emailSenderService.sendEmail(mailMessage);

@@ -1,6 +1,6 @@
 package edu.school21.cinema.annotations;
 
-import edu.school21.cinema.validators.PhoneNumberConstraintValidator;
+import edu.school21.cinema.constraints.PhoneNumberConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

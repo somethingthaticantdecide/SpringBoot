@@ -33,11 +33,10 @@ public class User implements UserDetails {
     @Email
     @NotEmpty
     private String email;
-    @ValidPassword
+    @ValidPassword(message = "{errors.incorrect.password}")
     private String password;
     @Transient
     private String passwordConfirm;
-    private Boolean activated;
     @OneToMany
     @ToString.Exclude
     private List<Image> avatars;

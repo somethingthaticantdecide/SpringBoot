@@ -9,6 +9,7 @@
 <div class="login-page">
     <div class="form">
         <form class="register-form" action="signUp" method="POST">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <@spring.formInput "userDetail.firstname",'placeholder="name"', "text"/>
             <@spring.showErrors "<br>"/>
             <@spring.formInput "userDetail.lastName",'placeholder="last name"', "text"/>

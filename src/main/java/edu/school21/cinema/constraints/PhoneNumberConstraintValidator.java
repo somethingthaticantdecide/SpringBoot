@@ -1,4 +1,4 @@
-package edu.school21.cinema.validators;
+package edu.school21.cinema.constraints;
 
 import edu.school21.cinema.annotations.PhoneNumber;
 

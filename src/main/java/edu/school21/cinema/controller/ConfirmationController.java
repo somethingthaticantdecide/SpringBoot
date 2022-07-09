@@ -1,5 +1,6 @@
 package edu.school21.cinema.controller;
 
+import edu.school21.cinema.enums.UserStatus;
 import edu.school21.cinema.model.ConfirmationToken;
 import edu.school21.cinema.model.User;
 import edu.school21.cinema.repositories.ConfirmationTokenRepository;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/confirm")
+@RequestMapping("/confirm/{confirmationToken}")
 public class ConfirmationController {
 
     private final ConfirmationTokenRepository confirmationTokenRepository;
@@ -25,11 +26,11 @@ public class ConfirmationController {
     }
 
     @GetMapping()
-    public String doGet(ModelMap model, @PathVariable("film-id") String confirmationToken) {
+    public String doGet(ModelMap model, @PathVariable String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
         if(token != null) {
             User user = userRepository.findByFirstname(token.getUser().getFirstname());
-            user.setActivated(true);
+            user.setStatus(UserStatus.CONFIRMED);
             userRepository.save(user);
             model.addAttribute("title", "Congratulations!");
             model.addAttribute("message", "Congratulations! Your account has been activated and email is verified!");
