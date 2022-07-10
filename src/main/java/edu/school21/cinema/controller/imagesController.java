@@ -1,7 +1,5 @@
 package edu.school21.cinema.controller;
 
-import edu.school21.cinema.model.Image;
-import edu.school21.cinema.services.ImagesService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

@@ -1,5 +1,6 @@
 <#import "spring.ftl" as spring />
 <link href="/css/login.css" rel="stylesheet" type="text/css">
+<meta content="text/html;charset=UTF-8"/>
 <!DOCTYPE html>
 <head>
     <title>Sign up</title>
