@@ -16,8 +16,8 @@
     <div class="form">
         <form class="login-form" action="signIn" method="POST">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input name="username" type="text" placeholder="username"/>
-            <input name="password" type="password" placeholder="password"/>
+            <input name="username" type="text" placeholder="<@spring.message "placeholder.username"/>"/>
+            <input name="password" type="password" placeholder="<@spring.message "placeholder.password"/>"/>
             <button type="submit">login</button>
             <p class="message">Not registered? <a href="/signUp">Create an account</a></p>
         </form>
