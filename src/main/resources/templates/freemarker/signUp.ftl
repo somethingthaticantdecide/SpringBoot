@@ -3,7 +3,7 @@
 <meta content="text/html;charset=UTF-8"/>
 <!DOCTYPE html>
 <head>
-    <title>Sign up</title>
+    <title><@spring.message "sign_up"/></title>
 </head>
 <html lang="ru">
 <body>
@@ -11,20 +11,40 @@
     <div class="form">
         <form class="register-form" action="signUp" method="POST">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <@spring.formInput "userDetail.firstname",'placeholder="name"', "text"/>
+<#--            <@spring.formInput "userDetail.firstname",'placeholder="name"', "text"/>-->
+<#--            <@spring.showErrors "<br>"/>-->
+<#--            <@spring.formInput "userDetail.lastName",'placeholder="last name"', "text"/>-->
+<#--            <@spring.showErrors "<br>"/>-->
+<#--            <@spring.formInput "userDetail.phoneNumber",'placeholder="phone number"', "tel"/>-->
+<#--            <@spring.showErrors "<br>"/>-->
+<#--            <@spring.formInput "userDetail.email",'placeholder="enter your email address"', "email"/>-->
+<#--            <@spring.showErrors "<br>"/>-->
+<#--            <@spring.formInput "userDetail.password",'placeholder="password"', "password"/>-->
+<#--            <@spring.showErrors "<br>"/>-->
+<#--            <@spring.formInput "userDetail.passwordConfirm",'placeholder="confirm password"', "password"/>-->
+<#--            <@spring.showErrors "<br>"/>-->
+
+            <input name="firstname" type="text" placeholder="<@spring.message "sign_up.name"/>" value="${(user.firstname)!}" />
+            <@spring.bind "userDetail.firstname" />
             <@spring.showErrors "<br>"/>
-            <@spring.formInput "userDetail.lastName",'placeholder="last name"', "text"/>
+            <input name="lastName" type="text" placeholder="<@spring.message "sign_up.last"/>" value="${(user.lastName)!}" />
+            <@spring.bind "userDetail.lastName" />
             <@spring.showErrors "<br>"/>
-            <@spring.formInput "userDetail.phoneNumber",'placeholder="phone number"', "tel"/>
+            <input name="phoneNumber" type="tel" placeholder="<@spring.message "sign_up.phone"/>" value="${(user.phoneNumber)!}" />
+            <@spring.bind "userDetail.phoneNumber" />
             <@spring.showErrors "<br>"/>
-            <@spring.formInput "userDetail.email",'placeholder="enter your email address"', "email"/>
+            <input name="email" type="email" placeholder="<@spring.message "sign_up.email"/>" value="${(user.email)!}" />
+            <@spring.bind "userDetail.email" />
             <@spring.showErrors "<br>"/>
-            <@spring.formInput "userDetail.password",'placeholder="password"', "password"/>
+            <input name="password" type="password" placeholder="<@spring.message "sign_up.password"/>" value="${(user.password)!}" />
+            <@spring.bind "userDetail.password" />
             <@spring.showErrors "<br>"/>
-            <@spring.formInput "userDetail.passwordConfirm",'placeholder="confirm password"', "password"/>
+            <input name="passwordConfirm" type="password" placeholder="<@spring.message "sign_up.confirm"/>" value="${(user.passwordConfirm)!}" />
+            <@spring.bind "userDetail.passwordConfirm" />
             <@spring.showErrors "<br>"/>
-            <button type="submit">create</button>
-            <p class="message">Already registered? <a href="/signIn">Sign In</a></p>
+
+            <button type="submit"><@spring.message "create"/></button>
+            <p class="message"><@spring.message "already_registered"/> <a href="/signIn"><@spring.message "sign_in"/></a></p>
         </form>
     </div>
 </div>

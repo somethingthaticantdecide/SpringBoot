@@ -6,7 +6,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Sign In</title>
+    <title><@spring.message "sign_in"/></title>
 </head>
 <body>
 <div>
@@ -18,8 +18,8 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input name="username" type="text" placeholder="<@spring.message "placeholder.username"/>"/>
             <input name="password" type="password" placeholder="<@spring.message "placeholder.password"/>"/>
-            <button type="submit">login</button>
-            <p class="message">Not registered? <a href="/signUp">Create an account</a></p>
+            <button type="submit"><@spring.message "login"/></button>
+            <p class="message"><@spring.message "not_registered"/> <a href="/signUp"><@spring.message "create_an_account"/></a></p>
         </form>
     </div>
 </div>
