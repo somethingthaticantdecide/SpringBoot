@@ -6,14 +6,14 @@
 <link href="/css/panel.css" rel="stylesheet" type="text/css">
 <body>
 <div id="header">
-	<H2>Cinema admin panel</H2>
+	<H2><@spring.message "admin_panel.header"/></H2>
 </div>
 
 <div id="content">
-	<a href="/admin/panel/films"><button class="button">Add films</button></a>
-	<a href="/admin/panel/halls"><button class="button">Add halls</button></a>
-	<a href="/admin/panel/sessions"><button class="button">Add sessions</button></a>
-	<a href="/sessions"><button class="button">Find Sessions</button></a>
+	<a href="/admin/panel/films"><button class="button"><@spring.message "admin_panel.add_film"/></button></a>
+	<a href="/admin/panel/halls"><button class="button"><@spring.message "admin_panel.add_halls"/></button></a>
+	<a href="/admin/panel/sessions"><button class="button"><@spring.message "admin_panel.add_sessions"/></button></a>
+	<a href="/sessions"><button class="button"><@spring.message "admin_panel.find_sessions"/></button></a>
 </div>
 </body>
 </html>
