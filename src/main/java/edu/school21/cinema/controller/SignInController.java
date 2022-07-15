@@ -1,6 +1,5 @@
 package edu.school21.cinema.controller;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ public class SignInController {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin/panel";
         } else if (request.isUserInRole("ROLE_USER")) {
-            return "redirect:/sessions/search";
+            return "redirect:/sessions";
         }
         return "signIn";
     }
