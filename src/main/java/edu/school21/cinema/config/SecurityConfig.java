@@ -19,13 +19,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/panel/*").hasRole("ADMIN")
+                .antMatchers("/admin/panel").hasRole("ADMIN")
+                .antMatchers("/profile").hasRole("USER")
+                .antMatchers("/sessions/search").hasRole("USER")
+                .antMatchers("/films/*/chat/messages").hasRole("USER")
+                .antMatchers("/films/*/chat").hasRole("USER")
                 .antMatchers("/signUp", "/signIn").permitAll()
-                .antMatchers("/*").permitAll()
+//                .antMatchers("/*").permitAll()
+//                .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/signIn")
-                .defaultSuccessUrl("/sessions")
-                .permitAll();
+                .loginPage("/signIn").permitAll()
+                .and()
+                .rememberMe();
     }
 }

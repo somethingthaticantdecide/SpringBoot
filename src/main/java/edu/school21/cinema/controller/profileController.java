@@ -22,32 +22,23 @@ import java.util.List;
 public class profileController {
 
     private final UserService userService;
-    private final ImagesService imagesService;
-    private final String uploadPath;
 
     @Autowired
-    public profileController(UserService userService, ImagesService imagesService, String uploadPath) {
+    public profileController(UserService userService) {
         this.userService = userService;
-        this.imagesService = imagesService;
-        this.uploadPath = uploadPath;
     }
 
     @GetMapping
     public String doGet(ModelMap model, HttpServletRequest request) throws IOException {
-        User user = userService.find((String) request.getSession().getAttribute("username"));
+        User user = userService.find(request.getUserPrincipal().getName());
         model.addAttribute("user", user);
         List<Image> userAvatars = user.getAvatars();
         if (userAvatars.size() > 0) {
             model.addAttribute("avatar", userAvatars.get(userAvatars.size() - 1));
         } else {
             String resultFileName = "blankProfile.png";
-            File oldFile = new ClassPathResource("/images/" + resultFileName).getFile();
-            File newFile = new File(uploadPath + "/" + resultFileName);
-            FileCopyUtils.copy(oldFile, newFile);
             Image image = new Image();
-            image.setFilename(resultFileName);
-            imagesService.add(image);
-
+            image.setFilename(new ClassPathResource("/images/" + resultFileName).getFile().getPath());
             model.addAttribute("avatar", image);
         }
         return "profile";

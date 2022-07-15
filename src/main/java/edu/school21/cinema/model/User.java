@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @Email
     @NotEmpty
     private String email;
-    @ValidPassword(message = "{errors.incorrect.password}")
+    @ValidPassword
     private String password;
     @Transient
     private String passwordConfirm;

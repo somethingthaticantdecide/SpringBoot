@@ -8,6 +8,6 @@ public class indexController {
 
     @GetMapping
     public String home() {
-        return "signIn";
+        return "redirect:/signIn";
     }
 }
