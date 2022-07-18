@@ -31,14 +31,11 @@ public class sessionsController {
         return "sessionsSearch";
     }
 
-    @PostMapping("/search")
-    public ResponseEntity<?> getSearchResultViaAjax(@Valid @RequestBody SearchCriteria search, Errors errors) {
+    @GetMapping("/search")
+    public ResponseEntity<?> getSearchResultViaAjax(@RequestParam("username") String username) {
         AjaxResponseBody result = new AjaxResponseBody();
-        if (errors.hasErrors()) {
-            result.setMsg(errors.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(",")));
-            return ResponseEntity.badRequest().body(result);
-        }
-        List<Session> sessions = search.getUsername() != null ? sessionService.listSessions(search.getUsername()) : sessionService.listSessions();
+
+        List<Session> sessions = username != null ? sessionService.listSessions(username) : sessionService.listSessions();
         result.setMsg(sessions.isEmpty() ? "no sessions found!" : "success");
         result.setResult(sessions);
 

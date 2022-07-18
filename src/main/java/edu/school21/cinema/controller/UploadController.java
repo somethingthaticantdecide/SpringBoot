@@ -32,7 +32,7 @@ public class UploadController {
 
     @PostMapping(consumes = "multipart/form-data")
     public String doPost(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
-        String username = (String) request.getSession().getAttribute("username");
+        String username = request.getUserPrincipal().getName();
         String resultFileName = imagesService.uploadFile(file);
 
         Image image = new Image();

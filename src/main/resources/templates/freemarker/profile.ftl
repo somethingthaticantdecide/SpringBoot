@@ -2,8 +2,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <body>
+<form style="text-align: right" method="post" action="/logout">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <button type="submit"><@spring.messageText "logout" "Logout"/></button>
+</form>
 <#if avatar??>
-    <img id="avatar" src="/images/${avatar.filename}" height="128" width="128">
+    <img id="avatar" src="/images/${avatar.filename}" height="128" width="128" alt="empty profile image">
 </#if>
 <table id="sessions" border="1">
     <thead>
@@ -25,9 +29,8 @@
 </table>
 
 <form id="upload" method="POST" action="uploadAvatar" enctype="multipart/form-data" >
-    File:
-    <input type="file" name="file" id="file"/>
-    <br/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    File:<input type="file" name="file" id="file"/>
     <br/>
     <input type="submit" value="Upload" name="upload"/>
 </form>

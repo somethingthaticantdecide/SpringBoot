@@ -36,9 +36,8 @@ public class profileController {
         if (userAvatars.size() > 0) {
             model.addAttribute("avatar", userAvatars.get(userAvatars.size() - 1));
         } else {
-            String resultFileName = "blankProfile.png";
             Image image = new Image();
-            image.setFilename(new ClassPathResource("/images/" + resultFileName).getFile().getPath());
+            image.setFilename("blankProfile.png");
             model.addAttribute("avatar", image);
         }
         return "profile";

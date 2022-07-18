@@ -50,7 +50,7 @@ public class adminPanelController {
     }
 
     @PostMapping(value = "/films/add", consumes = "multipart/form-data")
-    public String addFilm(@ModelAttribute("film") Film film, @RequestParam("file") MultipartFile file) throws IOException {
+    public void addFilm(@ModelAttribute("film") Film film, @RequestParam("file") MultipartFile file) throws IOException {
         if (null != film && !film.getTitle().isEmpty()) {
             String resultFileName;
             if (file.getSize() > 0) {
@@ -69,7 +69,6 @@ public class adminPanelController {
             film.setPoster(image);
             filmService.add(film);
         }
-        return "redirect:/admin/panel/films";
     }
 
     @GetMapping(value = "/halls")

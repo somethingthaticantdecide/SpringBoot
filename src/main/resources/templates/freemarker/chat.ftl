@@ -36,7 +36,8 @@
 	</#list>
 </div>
 <div class="input-group">
-	<label for="btn-input"></label>
+	<label for="btn-input">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	<input id="btn-input" type="text" class="chat_input" placeholder="Write your message here..." />
 	<button class="btn" onclick="sendMessage();" id="btn-chat">Send</button>
 </div>

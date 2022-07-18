@@ -9,10 +9,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<form style="text-align: right" method="post" action="/logout">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <button type="submit"><@spring.messageText "logout" "Logout"/></button>
+</form>
 <div class="container">
     <div id="feedback"></div>
     <form class="form-horizontal" id="search-form">
-        <label class="col-sm-2 control-label"><@spring.message "sessions_search.username"/></label>
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <label class="col-sm-2 control-label"><@spring.message "sessions_search.find"/></label>
         <input type="text" class="form-control" id="username"/>
         <button type="submit" id="bth-search" class="btn btn-primary btn-lg"><@spring.message "sessions_search.search"/></button>
     </form>

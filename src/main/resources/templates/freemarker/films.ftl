@@ -1,3 +1,4 @@
+<#import "/spring.ftl" as spring/>
 <link href="/css/admin.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html lang="ru">
@@ -11,6 +12,8 @@
 	<fieldset>
 		<legend>Add Film</legend>
 		<form name="film" action="/admin/panel/films/add" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<#--			<input name="title" type="text" placeholder="<@spring.message "films.title"/>"/>-->
 			title: <input type="text" name="title" /><br/>
 			year: <input type="number" value="0" min="0" name="year" /><br/>
 			age: <input type="number" value="0" min="0" name="age" /><br/>

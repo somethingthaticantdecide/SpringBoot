@@ -6,10 +6,13 @@
 </head>
 <link href="/css/panel.css" rel="stylesheet" type="text/css">
 <body>
+<form style="text-align: right" method="post" action="/logout">
+	<input type="hidden" name="_csrf" value="${_csrf.token}">
+	<button type="submit"><@spring.messageText "logout" "Logout"/></button>
+</form>
 <div id="header">
 	<H2><@spring.message "admin_panel.header"/></H2>
 </div>
-
 <div id="content">
 	<a href="/admin/panel/films"><button class="button"><@spring.message "admin_panel.add_film"/></button></a>
 	<a href="/admin/panel/halls"><button class="button"><@spring.message "admin_panel.add_halls"/></button></a>

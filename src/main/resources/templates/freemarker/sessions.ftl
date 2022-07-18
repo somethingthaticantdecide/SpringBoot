@@ -12,6 +12,7 @@
 	<fieldset>
 		<legend>Add Session</legend>
 		<form name="session" action="/admin/panel/sessions/add" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			time: <input type="datetime-local" name="time" /><br/>
 			cost: <input type="number" value="10" min="0" name="cost" /><br/>
 

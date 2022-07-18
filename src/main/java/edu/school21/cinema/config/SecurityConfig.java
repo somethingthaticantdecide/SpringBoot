@@ -19,24 +19,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/admin/panel/*").hasRole("ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/profile").fullyAuthenticated()
-                .antMatchers("/sessions/search").fullyAuthenticated()
-                .antMatchers("/sessions").fullyAuthenticated()
+                .antMatchers("/sessions/**").fullyAuthenticated()
                 .antMatchers("/films/*/chat/messages").fullyAuthenticated()
                 .antMatchers("/films/*/chat").fullyAuthenticated()
+                .antMatchers("/uploadAvatar").fullyAuthenticated()
+                .antMatchers("/", "/img/**", "/js/**", "/css/**").authenticated()
                 .antMatchers("/signUp", "/signIn").permitAll()
-//                .antMatchers("/js/").permitAll()
-//                .antMatchers("/js").permitAll()
-//                .antMatchers("/css/").permitAll()
-//                .antMatchers("/css").permitAll()
-//                .antMatchers("/*").permitAll()
-//                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/signIn").permitAll()
                 .and()
-                .rememberMe();
+                .rememberMe()
+                .tokenValiditySeconds(3600)
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .deleteCookies("JSESSIONID")
+                .deleteCookies("remember-me")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/");
     }
 }
