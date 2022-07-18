@@ -1,19 +1,14 @@
 package edu.school21.cinema.controller;
 
 import edu.school21.cinema.model.AjaxResponseBody;
-import edu.school21.cinema.model.SearchCriteria;
 import edu.school21.cinema.model.Session;
 import edu.school21.cinema.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/sessions")

@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/films/*/chat/messages").fullyAuthenticated()
                 .antMatchers("/films/*/chat").fullyAuthenticated()
                 .antMatchers("/uploadAvatar").fullyAuthenticated()
-                .antMatchers("/", "/img/**", "/js/**", "/css/**").authenticated()
+                .antMatchers("/", "/img/**", "/js/**", "/css/**").permitAll()
                 .antMatchers("/signUp", "/signIn").permitAll()
                 .anyRequest().authenticated()
                 .and()
