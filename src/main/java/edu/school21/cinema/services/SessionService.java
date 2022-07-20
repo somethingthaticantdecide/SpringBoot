@@ -5,6 +5,8 @@ import edu.school21.cinema.repositories.SessionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Service
 public class SessionService {
@@ -22,8 +24,9 @@ public class SessionService {
         sessionRepository.save(session);
     }
 
-    public List<Session> listSessions(String filmName) {
-        return sessionRepository.getSessions(filmName);
+    public List<Session> getSessionsByFilmName(String filmName) {
+        return listSessions().stream().filter(cinemaSession -> cinemaSession.getFilm().getTitle().toLowerCase()
+                .contains(filmName.toLowerCase(Locale.ROOT))).collect(Collectors.toList());
     }
 
 }

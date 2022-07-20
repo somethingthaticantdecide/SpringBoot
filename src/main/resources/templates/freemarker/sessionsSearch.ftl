@@ -18,7 +18,7 @@
     <form class="form-horizontal" id="search-form">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <label class="col-sm-2 control-label"><@spring.message "sessions_search.find"/></label>
-        <input type="text" class="form-control" id="username"/>
+        <input type="text" class="form-control" id="search_text"/>
         <button type="submit" id="bth-search" class="btn btn-primary btn-lg"><@spring.message "sessions_search.search"/></button>
     </form>
     <br/>

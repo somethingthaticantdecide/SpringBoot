@@ -6,14 +6,14 @@ $(document).ready(function () {
 });
 
 function fire_ajax_submit() {
-    var search = $("#username").val();
+    var search = $("#search_text").val();
     $("#btn-search").prop("disabled", true);
 
     $.ajax({
         type: "GET",
         contentType: "application/json",
         url: "/sessions/search",
-        data:  {'username': search},
+        data:  {'search': search},
         dataType: 'json',
         cache: false,
         timeout: 600000,

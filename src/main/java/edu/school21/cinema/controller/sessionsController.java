@@ -27,13 +27,11 @@ public class sessionsController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> getSearchResultViaAjax(@RequestParam("username") String username) {
+    public ResponseEntity<?> getSearchResultViaAjax(@RequestParam("search") String search) {
         AjaxResponseBody result = new AjaxResponseBody();
-
-        List<Session> sessions = username != null ? sessionService.listSessions(username) : sessionService.listSessions();
+        List<Session> sessions = search != null ? sessionService.getSessionsByFilmName(search) : sessionService.listSessions();
         result.setMsg(sessions.isEmpty() ? "no sessions found!" : "success");
         result.setResult(sessions);
-
         return ResponseEntity.ok(result);
     }
 }
