@@ -15,10 +15,10 @@ public class MessagesService {
     }
 
     public void add(OutputMessage outputMessage) {
-        messagesRepository.add(outputMessage);
+        messagesRepository.save(outputMessage);
     }
 
     public List<OutputMessage> getMessagesByFilmId(String id) {
-        return messagesRepository.getMessagesByFilmId(id);
+        return messagesRepository.findAllByFilm(id);
     }
 }

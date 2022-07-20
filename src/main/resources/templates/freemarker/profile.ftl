@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring />
 <link href="/css/profile.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html lang="ru">

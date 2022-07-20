@@ -15,11 +15,11 @@ public class SessionService {
     }
 
     public List<Session> listSessions() {
-        return sessionRepository.getSessions();
+        return sessionRepository.findAll();
     }
 
     public void add(Session session) {
-        sessionRepository.add(session);
+        sessionRepository.save(session);
     }
 
     public List<Session> listSessions(String filmName) {

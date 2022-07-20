@@ -15,15 +15,15 @@ public class FilmService {
     }
 
     public List<Film> listFilms() {
-        return filmsRepository.getFilms();
+        return filmsRepository.findAll();
     }
 
     public void add(Film film) {
-        filmsRepository.add(film);
+        filmsRepository.save(film);
     }
 
     public Film getFilmById(Long id){
-        return filmsRepository.getFilmById(id);
+        return filmsRepository.findById(id).orElse(null);
     }
 
 }

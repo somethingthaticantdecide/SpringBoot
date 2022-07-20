@@ -1,16 +1,8 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.model.Image;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface ImagesRepository {
-
-    void add(Image image);
-
-    List<Image> getImages();
-
-    Image getImageById(Integer id);
-
-    Image getImageByName(String name);
+public interface ImagesRepository extends JpaRepository<Image, Long> {
+    Image findByFilename(String filename);
 }

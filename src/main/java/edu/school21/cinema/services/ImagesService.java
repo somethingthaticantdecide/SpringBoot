@@ -24,19 +24,19 @@ public class ImagesService {
     }
 
     public List<Image> listImages() {
-        return imagesRepository.getImages();
+        return imagesRepository.findAll();
     }
 
     public void add(Image image) {
-        imagesRepository.add(image);
+        imagesRepository.save(image);
     }
 
-    public Image getImageById(Integer id){
-        return imagesRepository.getImageById(id);
+    public Image getImageById(Long id){
+        return imagesRepository.findById(id).orElse(null);
     }
 
     public Image getImageByName(String name){
-        return imagesRepository.getImageByName(name);
+        return imagesRepository.findByFilename(name);
     }
 
     public String uploadFile(MultipartFile file) throws IOException {
