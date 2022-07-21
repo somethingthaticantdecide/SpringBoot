@@ -13,7 +13,7 @@ function fire_ajax_submit() {
         type: "GET",
         contentType: "application/json",
         url: "/sessions/search",
-        data:  {'search': search},
+        data:  { 'search': search },
         dataType: 'json',
         cache: false,
         timeout: 600000,
