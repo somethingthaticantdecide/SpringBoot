@@ -11,7 +11,7 @@ function connect() {
 }
 
 function disconnect() {
-    if(stompClient != null) {
+    if (stompClient != null) {
         stompClient.disconnect();
     }
     console.log("Disconnected");

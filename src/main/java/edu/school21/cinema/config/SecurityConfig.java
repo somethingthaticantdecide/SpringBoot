@@ -20,9 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public StrictHttpFirewall httpFirewall() {
         StrictHttpFirewall firewall = new StrictHttpFirewall();
-        firewall.setAllowedHeaderNames((header) -> true);
+//        firewall.setAllowedHeaderNames((header) -> true);
         firewall.setAllowedHeaderValues((header) -> true);
-        firewall.setAllowedParameterNames((parameter) -> true);
+//        firewall.setAllowedParameterNames((parameter) -> true);
         return firewall;
     }
 
@@ -31,16 +31,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/admin/panel/films/add").hasRole("ADMIN")
-                .antMatchers("/profile").authenticated()
-                .antMatchers("/sessions/**").authenticated()
-                .antMatchers("/films/*/chat/messages").authenticated()
-                .antMatchers("/films/*/chat").authenticated()
-                .antMatchers("/uploadAvatar").authenticated()
+                .antMatchers("/profile").fullyAuthenticated()
+                .antMatchers("/sessions/**").fullyAuthenticated()
+                .antMatchers("/films/*/chat/messages").fullyAuthenticated()
+                .antMatchers("/films/*/chat").fullyAuthenticated()
+                .antMatchers("/uploadAvatar").fullyAuthenticated()
+                .antMatchers("/chat", "/topic", "/app",  "/app/**","/app/**", "/topic/messages").authenticated()
+                .antMatchers("/chat/**", "/topic/**").authenticated()
                 .antMatchers("/", "/img/**", "/js/**", "/css/**").permitAll()
                 .antMatchers("/signUp", "/signIn").permitAll()
-                .antMatchers("/chat", "/topic", "/app",  "/app/**","/app/**", "/topic/messages").permitAll()
-                .antMatchers("/chat/**", "/topic/**").permitAll()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/signIn").permitAll()

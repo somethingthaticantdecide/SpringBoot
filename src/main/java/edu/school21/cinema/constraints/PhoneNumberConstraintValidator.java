@@ -15,7 +15,7 @@ public class PhoneNumberConstraintValidator implements ConstraintValidator<Phone
 
     @Override
     public boolean isValid(String phone, ConstraintValidatorContext context) {
-        Pattern pattern = Pattern.compile("^(\\d{3}[- .]?){2}\\d{4}$");
+        Pattern pattern = Pattern.compile("^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$");
         Matcher matcher = pattern.matcher(phone);
         return matcher.matches();
     }

@@ -29,7 +29,8 @@ function fire_ajax_submit() {
                     '<td>' + data.result[i].cost + '</td>' +
                     '<td>' + data.result[i].film.title + '</td>' +
                     '<td>' + data.result[i].hall.name + '</td>' +
-                    '<td><a href="/films/' + data.result[i].film.id + '/chat">Chat about film</a> </td>' +
+                    // '<td><a href="/films/' + data.result[i].film.id + '/chat">Chat about film</a> </td>' +
+                    '<td><a href="/films/' + data.result[i].film.id + '">Show film page</a> </td>' +
                     '</tr>';
             }
             $('#sessions').empty().append(output);

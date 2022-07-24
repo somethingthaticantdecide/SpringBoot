@@ -31,6 +31,8 @@ public class imagesController {
             File file;
             if (Objects.equals(name, "blankProfile.png")) {
                 file = new ClassPathResource("/images/blankProfile.png").getFile();
+            } else if (Objects.equals(name, "poster-holder.jpg")) {
+                file = new ClassPathResource("/images/poster-holder.jpg").getFile();
             } else {
                 file = new File(uploadPath + "/" + name);
             }
