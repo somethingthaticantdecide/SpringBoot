@@ -12,9 +12,11 @@ import java.util.Objects;
 @Table(name = "films")
 public class Film extends AbstractEntity {
 
+    @Column(length = 1000)
     private String title;
     private int year;
     private int age;
+    @Column(columnDefinition = "text")
     private String description;
 
     @ManyToOne
