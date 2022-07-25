@@ -3,6 +3,7 @@
 <meta content="text/html;charset=UTF-8"/>
 <!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
     <title><@spring.message "sign_up"/></title>
 </head>
 <html lang="ru">

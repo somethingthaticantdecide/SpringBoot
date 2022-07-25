@@ -7,6 +7,7 @@ import edu.school21.cinema.model.User;
 import edu.school21.cinema.repositories.ConfirmationTokenRepository;
 import edu.school21.cinema.repositories.UserRepository;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,15 +19,15 @@ import java.util.Objects;
 @Service
 public class UserService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final EmailSenderService emailSenderService;
     private final UserRepository userRepository;
     private final ConfirmationTokenRepository confirmationTokenRepository;
+    private final VerificationService verificationService;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, EmailSenderService emailSenderService, ConfirmationTokenRepository confirmationTokenRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, EmailSenderService emailSenderService, ConfirmationTokenRepository confirmationTokenRepository, VerificationService verificationService) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.emailSenderService = emailSenderService;
         this.confirmationTokenRepository = confirmationTokenRepository;
+        this.verificationService = verificationService;
     }
 
     public void save(User user)  {
@@ -43,8 +44,7 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean saveUser(User user) {
-        User userFromDB = userRepository.findByFirstname(user.getFirstname());
-        if (userFromDB != null) {
+        if (userRepository.findByFirstname(user.getFirstname()) != null) {
             return false;
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -57,19 +57,10 @@ public class UserService implements UserDetailsService {
         }
         userRepository.save(user);
         if (user.getStatus() == UserStatus.NOT_CONFIRMED) {
-            sendVerificationEmail(user);
+            ConfirmationToken confirmationToken = new ConfirmationToken(user);
+            confirmationTokenRepository.save(confirmationToken);
+            verificationService.sendVerificationEmail(user, confirmationToken);
         }
         return true;
-    }
-
-    private void sendVerificationEmail(User user) {
-        ConfirmationToken confirmationToken = new ConfirmationToken(user);
-        confirmationTokenRepository.save(confirmationToken);
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(user.getEmail());
-        mailMessage.setSubject("Complete Registration!");
-        mailMessage.setText("To confirm your account, please click here : http://localhost:8080/confirm/"
-                + confirmationToken.getConfirmationToken());
-        emailSenderService.sendEmail(mailMessage);
     }
 }

@@ -40,11 +40,11 @@ public class SignUpController {
             return "signUp";
         }
         if (!user.getPassword().equals(user.getPasswordConfirm())){
-            bindingResult.rejectValue("password", "Пароли не совпадают", "Пароли не совпадают");
+            bindingResult.rejectValue("password", "errors.password.mismatch", "errors.password.mismatch");
             return "signUp";
         }
         if (!userService.saveUser(user)){
-            bindingResult.rejectValue("firstname", "This username already exists", "This username already exists");
+            bindingResult.rejectValue("firstname", "errors.username.exists", "errors.username.exists");
             return "signUp";
         }
         return "redirect:/";

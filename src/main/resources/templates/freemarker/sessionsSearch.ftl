@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <meta charset="UTF-8">
     <title><@spring.message "sessions_search.title"/></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>

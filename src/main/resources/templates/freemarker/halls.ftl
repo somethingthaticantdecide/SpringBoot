@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+	<meta charset="UTF-8">
 	<link href="/css/admin.css" rel="stylesheet" type="text/css">
 </head>
 <body>

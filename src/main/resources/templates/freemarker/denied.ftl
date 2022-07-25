@@ -4,11 +4,11 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>${title}!</title>
+    <title>Denied!</title>
 </head>
 <body>
 <div style="text-align: center;">
-    <h3>${message}</h3>
+    <h3>Account is not confirmed!</h3>
     <p><a href="/signIn"><@spring.message "confirm.go_to_sign_in"/></a></p>
 </div>
 </body>

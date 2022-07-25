@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+	<meta charset="UTF-8">
 	<title>Cinema</title>
 </head>
 <link href="/css/panel.css" rel="stylesheet" type="text/css">
