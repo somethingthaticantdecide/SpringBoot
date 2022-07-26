@@ -1,5 +1,6 @@
 package edu.school21.cinema.services;
 
+import edu.school21.cinema.exceptions.ResourceNotFoundException;
 import edu.school21.cinema.model.Film;
 import edu.school21.cinema.repositories.FilmsRepository;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,8 @@ public class FilmService {
     }
 
     public Film getFilmById(Long id){
-        return filmsRepository.findById(id).orElse(null);
+        return filmsRepository.findById(id).orElseThrow(
+            () -> new ResourceNotFoundException("Product with id " + id + " not found"));
     }
 
 }
