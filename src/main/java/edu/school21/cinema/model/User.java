@@ -40,7 +40,7 @@ public class User implements UserDetails {
     @OneToMany
     @ToString.Exclude
     private List<Image> avatars;
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, fetch = FetchType.EAGER, orphanRemoval = true)
     @ToString.Exclude
     private List<UserSession> sessions;
     @Enumerated(EnumType.STRING)
