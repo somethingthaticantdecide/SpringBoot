@@ -4,6 +4,7 @@ import edu.school21.cinema.enums.Role;
 import edu.school21.cinema.enums.UserStatus;
 import edu.school21.cinema.model.ConfirmationToken;
 import edu.school21.cinema.model.User;
+import edu.school21.cinema.model.UserSession;
 import edu.school21.cinema.repositories.ConfirmationTokenRepository;
 import edu.school21.cinema.repositories.UserRepository;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,6 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 @Service
@@ -62,5 +65,15 @@ public class UserService implements UserDetailsService {
             verificationService.sendVerificationEmail(user, confirmationToken);
         }
         return true;
+    }
+
+    public void addUserSession(String remoteAddr, User user) {
+        UserSession userSession = new UserSession();
+        userSession.setUser(user);
+        userSession.setDate(ZonedDateTime.now().toLocalDate().toString());
+        userSession.setTime(ZonedDateTime.now().toLocalTime().toString());
+        userSession.setIp(remoteAddr);
+        user.getSessions().add(userSession);
+        userRepository.save(user);
     }
 }

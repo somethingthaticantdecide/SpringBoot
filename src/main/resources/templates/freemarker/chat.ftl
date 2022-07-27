@@ -7,7 +7,7 @@
 	function sendMessage() {
 		var author = "${author}";
 		var btnInput = document.getElementById('btn-input');
-		stompClient.send("/app/chat", {}, JSON.stringify({'author':author, 'text':btnInput.value, 'film':${film}}));
+		stompClient.send("/app/chat", {}, JSON.stringify({'author':author, 'text':btnInput.value, 'film':${film.title}}));
 		btnInput.value = "";
 	}
 

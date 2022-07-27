@@ -2,16 +2,25 @@ package edu.school21.cinema.controller;
 
 import edu.school21.cinema.enums.UserStatus;
 import edu.school21.cinema.model.User;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import edu.school21.cinema.model.UserSession;
+import edu.school21.cinema.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/signIn")
 public class SignInController {
+
+    private final UserService userService;
+
+    public SignInController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public String doGet(HttpServletRequest request) {
@@ -19,13 +28,13 @@ public class SignInController {
             return "redirect:/admin/panel";
         } else if (request.isUserInRole("ROLE_USER")) {
             if (request.getUserPrincipal() != null) {
-                User user = (User) ((UsernamePasswordAuthenticationToken) request.getUserPrincipal()).getPrincipal();
-                if (user.getStatus().equals(UserStatus.CONFIRMED)) {
+                User user = userService.find(request.getUserPrincipal().getName());
+                if (user != null && user.getStatus().equals(UserStatus.CONFIRMED)) {
+                    userService.addUserSession(request.getRemoteAddr(), user);
                     return "redirect:/sessions";
                 }
                 return "redirect:/denied";
             }
-
         }
         return "signIn";
     }

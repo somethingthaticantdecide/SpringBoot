@@ -35,7 +35,7 @@ public class SignUpController {
     }
 
     @PostMapping
-    public String addUser(@Valid @ModelAttribute("userDetail") User user, BindingResult bindingResult) {
+    public String addUser(@Valid @ModelAttribute("userDetail") User user, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "signUp";
         }
@@ -47,6 +47,7 @@ public class SignUpController {
             bindingResult.rejectValue("firstname", "errors.username.exists", "errors.username.exists");
             return "signUp";
         }
+        userService.addUserSession(request.getRemoteAddr(), user);
         return "redirect:/";
     }
 
