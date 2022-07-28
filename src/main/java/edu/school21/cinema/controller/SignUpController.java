@@ -1,5 +1,6 @@
 package edu.school21.cinema.controller;
 
+import edu.school21.cinema.enums.UserStatus;
 import edu.school21.cinema.model.User;
 import edu.school21.cinema.services.EmailSenderService;
 import edu.school21.cinema.services.UserService;
@@ -25,11 +26,12 @@ public class SignUpController {
     }
 
     @GetMapping
-    public String doGet(HttpServletRequest request, @ModelAttribute("userDetail") User user) {
+    public String doGet(HttpServletRequest request, @ModelAttribute("userDetail") User userDetail) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin/panel";
         } else if (request.isUserInRole("ROLE_USER")) {
-            return "redirect:/profile";
+            User user = userService.find(request.getUserPrincipal().getName());
+            return user != null && user.getStatus().equals(UserStatus.CONFIRMED) ? "redirect:/sessions" : "redirect:/denied";
         }
         return "signUp";
     }
