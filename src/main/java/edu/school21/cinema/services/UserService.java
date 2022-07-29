@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
@@ -51,6 +52,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setSessions(new ArrayList<>());
         if (Objects.equals(user.getFirstname(), "admin")) {
             user.setRoles(Role.ROLE_ADMIN);
             user.setStatus(UserStatus.CONFIRMED);

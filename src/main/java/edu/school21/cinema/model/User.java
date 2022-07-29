@@ -1,10 +1,11 @@
 package edu.school21.cinema.model;
 
-import edu.school21.cinema.annotations.ValidPassword;
 import edu.school21.cinema.annotations.PhoneNumber;
+import edu.school21.cinema.annotations.ValidPassword;
 import edu.school21.cinema.enums.Role;
 import edu.school21.cinema.enums.UserStatus;
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,11 +15,13 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @ToString
+@RequiredArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -47,9 +50,6 @@ public class User implements UserDetails {
     private Role roles;
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-
-    public User() {
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -86,4 +86,16 @@ public class User implements UserDetails {
         return firstname;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
