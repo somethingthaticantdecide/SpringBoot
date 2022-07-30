@@ -18,14 +18,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public StrictHttpFirewall httpFirewall() {
-        StrictHttpFirewall firewall = new StrictHttpFirewall();
-//        firewall.setAllowedHeaderNames((header) -> true);
-        firewall.setAllowedHeaderValues((header) -> true);
-//        firewall.setAllowedParameterNames((parameter) -> true);
-        return firewall;
-    }
+//    @Bean
+//    public StrictHttpFirewall httpFirewall() {
+//        StrictHttpFirewall firewall = new StrictHttpFirewall();
+////        firewall.setAllowedHeaderNames((header) -> true);
+//        firewall.setAllowedHeaderValues((header) -> true);
+////        firewall.setAllowedParameterNames((parameter) -> true);
+//        return firewall;
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
