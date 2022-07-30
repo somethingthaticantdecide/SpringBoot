@@ -14,8 +14,7 @@ public class IndexController {
     }
 
     @GetMapping("/denied")
-    public String denied(HttpServletRequest request) {
-//        ((UsernamePasswordAuthenticationToken) request.getUserPrincipal()).setAuthenticated(false);
+    public String denied() {
         return "denied";
     }
 }

@@ -18,15 +18,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public StrictHttpFirewall httpFirewall() {
-//        StrictHttpFirewall firewall = new StrictHttpFirewall();
-////        firewall.setAllowedHeaderNames((header) -> true);
-//        firewall.setAllowedHeaderValues((header) -> true);
-////        firewall.setAllowedParameterNames((parameter) -> true);
-//        return firewall;
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -43,9 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/img/**", "/js/**", "/css/**").permitAll()
                 .antMatchers("/signUp", "/signIn").permitAll()
                 .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/signIn").permitAll()
                 .and()
                 .rememberMe()
                 .tokenValiditySeconds(3600)

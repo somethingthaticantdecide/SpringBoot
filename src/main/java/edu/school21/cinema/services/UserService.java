@@ -7,16 +7,12 @@ import edu.school21.cinema.model.User;
 import edu.school21.cinema.model.UserSession;
 import edu.school21.cinema.repositories.ConfirmationTokenRepository;
 import edu.school21.cinema.repositories.UserRepository;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
