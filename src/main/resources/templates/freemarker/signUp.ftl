@@ -12,22 +12,22 @@
     <div class="form">
         <form class="register-form" action="signUp" method="POST">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input name="firstname" type="text" placeholder="<@spring.message "sign_up.name"/>" value="${(user.firstname)!}" />
+            <input name="firstname" type="text" maxlength="255" placeholder="<@spring.message "sign_up.name"/>" value="${(user.firstname)!}" />
             <@spring.bind "userDetail.firstname" />
             <@spring.showErrors "<br>"/>
-            <input name="lastName" type="text" placeholder="<@spring.message "sign_up.last"/>" value="${(user.lastName)!}" />
+            <input name="lastName" type="text" maxlength="255" placeholder="<@spring.message "sign_up.last"/>" value="${(user.lastName)!}" />
             <@spring.bind "userDetail.lastName" />
             <@spring.showErrors "<br>"/>
             <input name="phoneNumber" type="tel" placeholder="<@spring.message "sign_up.phone"/>" value="${(user.phoneNumber)!}" />
             <@spring.bind "userDetail.phoneNumber" />
             <@spring.showErrors "<br>"/>
-            <input name="email" type="email" placeholder="<@spring.message "sign_up.email"/>" value="${(user.email)!}" />
+            <input name="email" type="email" maxlength="255" placeholder="<@spring.message "sign_up.email"/>" value="${(user.email)!}" />
             <@spring.bind "userDetail.email" />
             <@spring.showErrors "<br>"/>
-            <input name="password" type="password" placeholder="<@spring.message "sign_up.password"/>" value="${(user.password)!}" />
+            <input name="password" type="password" maxlength="255" placeholder="<@spring.message "sign_up.password"/>" value="${(user.password)!}" />
             <@spring.bind "userDetail.password" />
             <@spring.showErrors "<br>"/>
-            <input name="passwordConfirm" type="password" placeholder="<@spring.message "sign_up.confirm"/>" value="${(user.passwordConfirm)!}" />
+            <input name="passwordConfirm" type="password" maxlength="255" placeholder="<@spring.message "sign_up.confirm"/>" value="${(user.passwordConfirm)!}" />
             <@spring.bind "userDetail.passwordConfirm" />
             <@spring.showErrors "<br>"/>
             <button type="submit"><@spring.message "create"/></button>

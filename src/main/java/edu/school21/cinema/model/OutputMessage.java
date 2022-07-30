@@ -13,7 +13,9 @@ import java.util.Objects;
 @Table(name = "messages")
 public class OutputMessage extends AbstractEntity {
 
+    @Column(length = 1000)
     private String author;
+    @Column(columnDefinition = "text")
     private String text;
     private String time;
     private String film;

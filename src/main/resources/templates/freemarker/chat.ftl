@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
 <link href="/css/chat.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.0/sockjs.min.js"></script>
@@ -9,9 +7,10 @@
 	function sendMessage() {
 		var author = "${author}";
 		var btnInput = document.getElementById('btn-input');
-		stompClient.send("/app/chat", {}, JSON.stringify({'author':author, 'text':btnInput.value, 'film':${film.title}}));
+		stompClient.send("/app/chat", {}, JSON.stringify({'author':author, 'text':btnInput.value, 'film':${film}}));
 		btnInput.value = "";
 	}
+
 	function showMessageOutput(messageOutput) {
 		var response = document.getElementById('chat');
 		var div = document.createElement('div');
@@ -28,6 +27,8 @@
 		response.appendChild(div);
 	}
 </script>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">

@@ -3,6 +3,7 @@ package edu.school21.cinema.controller;
 import edu.school21.cinema.enums.UserStatus;
 import edu.school21.cinema.model.User;
 import edu.school21.cinema.services.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

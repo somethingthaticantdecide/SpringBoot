@@ -15,10 +15,10 @@
 		<form name="film" action="/admin/panel/films/add" method="post" enctype="multipart/form-data">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 <#--			<input name="title" type="text" placeholder="<@spring.message "films.title"/>"/>-->
-			title: <input type="text" name="title" /><br/>
+			title: <input type="text" name="title" maxlength="255"/><br/>
 			year: <input type="number" value="0" min="0" name="year" /><br/>
 			age: <input type="number" value="0" min="0" name="age" /><br/>
-			description: <input type="text" name="description" /><br/>
+			description: <input type="text" name="description" maxlength="255"/><br/>
 			<input type="file" name="file" accept="image/*" style="background-color: darkgrey">
 			<button type="submit">Save</button>
 		</form>

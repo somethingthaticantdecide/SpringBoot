@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/films/{film-id}/chat")
-public class chatController {
+public class ChatController {
 
     private final MessagesService messagesService;
     private final FilmService filmService;
 
     @Autowired
-    public chatController(MessagesService messagesService, FilmService filmService) {
+    public ChatController(MessagesService messagesService, FilmService filmService) {
         this.messagesService = messagesService;
         this.filmService = filmService;
     }
 
     @GetMapping()
-    public String chat(ModelMap model, @PathVariable("film-id") String film) {
-        model.addAttribute("messages", messagesService.getMessagesByFilmId(film));
-        model.addAttribute("film", filmService.getFilmById(Long.valueOf(film)));
+    public String chat(ModelMap model, @PathVariable("film-id") String film_id) {
+        model.addAttribute("messages", messagesService.getMessagesByFilmId(film_id));
+        model.addAttribute("film", filmService.getFilmById(Long.valueOf(film_id)).getId());
         model.addAttribute("author", SecurityContextHolder.getContext().getAuthentication().getName());
         return "chat";
     }

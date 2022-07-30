@@ -18,10 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/admin/panel")
-public class adminPanelController {
+public class AdminPanelController {
 
     private final FilmService filmService;
     private final HallsService hallsService;
@@ -30,7 +31,7 @@ public class adminPanelController {
     private final String uploadPath;
 
     @Autowired
-    public adminPanelController(FilmService filmService, HallsService hallsService, SessionService sessionService, ImagesService imagesService, String uploadPath) {
+    public AdminPanelController(FilmService filmService, HallsService hallsService, SessionService sessionService, ImagesService imagesService, String uploadPath) {
         this.filmService = filmService;
         this.hallsService = hallsService;
         this.sessionService = sessionService;
@@ -96,7 +97,7 @@ public class adminPanelController {
 
     @PostMapping(value = "/sessions/add")
     public String addSession(Session session, @ModelAttribute("film_id") String film_id, @ModelAttribute("hall_id") String hall_id) {
-        if (session != null) {
+        if (session != null && !Objects.equals(film_id, "") && !Objects.equals(hall_id, "")) {
             Film film = filmService.getFilmById(Long.valueOf(film_id));
             Hall hall = hallsService.getHallById(Long.valueOf(hall_id));
 

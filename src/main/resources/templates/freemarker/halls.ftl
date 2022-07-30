@@ -13,7 +13,7 @@
 		<legend>Add Hall</legend>
 		<form name="hall" action="/admin/panel/halls/add" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			name: <input type="text" name="name" /><br/>
+			name: <input type="text" name="name"  maxlength="255"/><br/>
 			seats: <input type="number" value="10" min="0" max="200" name="seats" /><br/>
 			<input type="submit" value="   Save   " />
 		</form>
