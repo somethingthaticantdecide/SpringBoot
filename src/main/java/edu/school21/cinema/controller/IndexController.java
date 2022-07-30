@@ -1,13 +1,12 @@
 package edu.school21.cinema.controller;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class indexController {
+public class IndexController {
 
     @GetMapping
     public String home() {
@@ -16,7 +15,7 @@ public class indexController {
 
     @GetMapping("/denied")
     public String denied(HttpServletRequest request) {
-        ((UsernamePasswordAuthenticationToken) request.getUserPrincipal()).setAuthenticated(false);
+//        ((UsernamePasswordAuthenticationToken) request.getUserPrincipal()).setAuthenticated(false);
         return "denied";
     }
 }

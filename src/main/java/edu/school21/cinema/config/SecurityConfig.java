@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 @Configuration
@@ -13,7 +14,7 @@ import org.springframework.security.web.firewall.StrictHttpFirewall;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -42,9 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/img/**", "/js/**", "/css/**").permitAll()
                 .antMatchers("/signUp", "/signIn").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/signIn").permitAll()
+//                .and()
+//                .formLogin()
+//                .loginPage("/signIn").permitAll()
                 .and()
                 .rememberMe()
                 .tokenValiditySeconds(3600)

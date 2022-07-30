@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/films/{film-id}")
-public class filmController {
+public class FilmController {
 
     private final FilmService filmService;
     private final SessionService sessionService;
 
     @Autowired
-    public filmController(FilmService filmService, SessionService sessionService) {
+    public FilmController(FilmService filmService, SessionService sessionService) {
         this.filmService = filmService;
         this.sessionService = sessionService;
     }

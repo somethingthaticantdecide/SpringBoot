@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,14 +23,14 @@ import java.util.Objects;
 
 @Service
 public class UserService implements UserDetailsService {
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final ConfirmationTokenRepository confirmationTokenRepository;
     private final VerificationService verificationService;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, EmailSenderService emailSenderService, ConfirmationTokenRepository confirmationTokenRepository, VerificationService verificationService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, EmailSenderService emailSenderService, ConfirmationTokenRepository confirmationTokenRepository, VerificationService verificationService) {
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.passwordEncoder = passwordEncoder;
         this.confirmationTokenRepository = confirmationTokenRepository;
         this.verificationService = verificationService;
     }
@@ -51,7 +52,7 @@ public class UserService implements UserDetailsService {
         if (userRepository.findByFirstname(user.getFirstname()) != null) {
             return false;
         }
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setSessions(new ArrayList<>());
         if (Objects.equals(user.getFirstname(), "admin")) {
             user.setRoles(Role.ROLE_ADMIN);

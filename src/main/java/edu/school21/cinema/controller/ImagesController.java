@@ -16,12 +16,12 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/images")
-public class imagesController {
+public class ImagesController {
 
     private final String uploadPath;
 
     @Autowired
-    public imagesController(String uploadPath) {
+    public ImagesController(String uploadPath) {
         this.uploadPath = uploadPath;
     }
 

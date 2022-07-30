@@ -2,29 +2,25 @@ package edu.school21.cinema.controller;
 
 import edu.school21.cinema.model.Image;
 import edu.school21.cinema.model.User;
-import edu.school21.cinema.services.ImagesService;
 import edu.school21.cinema.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 @Controller
 @RequestMapping("/profile")
-public class profileController {
+public class ProfileController {
 
     private final UserService userService;
 
     @Autowired
-    public profileController(UserService userService) {
+    public ProfileController(UserService userService) {
         this.userService = userService;
     }
 

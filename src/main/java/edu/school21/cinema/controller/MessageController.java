@@ -12,12 +12,12 @@ import java.util.Date;
 import java.util.Objects;
 
 @Controller
-public class messageController {
+public class MessageController {
 
     private final MessagesService messagesService;
 
     @Autowired
-    public messageController(MessagesService messagesService) {
+    public MessageController(MessagesService messagesService) {
         this.messagesService = messagesService;
     }
 

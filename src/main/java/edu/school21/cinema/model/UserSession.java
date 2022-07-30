@@ -26,13 +26,14 @@ public class UserSession extends AbstractEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         UserSession that = (UserSession) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        return Objects.equals(user, that.user) && Objects.equals(date, that.date) && Objects.equals(time, that.time) && Objects.equals(ip, that.ip);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(super.hashCode(), user, date, time, ip);
     }
 }

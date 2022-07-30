@@ -12,12 +12,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/sessions")
-public class sessionsController {
+public class SessionsController {
 
     private final SessionService sessionService;
 
     @Autowired
-    public sessionsController(SessionService sessionService) {
+    public SessionsController(SessionService sessionService) {
         this.sessionService = sessionService;
     }
 

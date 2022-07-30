@@ -89,13 +89,13 @@ public class User implements UserDetails {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
+        return Objects.equals(id, user.id) && Objects.equals(firstname, user.firstname) && Objects.equals(lastName, user.lastName) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(passwordConfirm, user.passwordConfirm) && Objects.equals(avatars, user.avatars) && Objects.equals(sessions, user.sessions) && roles == user.roles && status == user.status;
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, firstname, lastName, phoneNumber, email, password, passwordConfirm, avatars, sessions, roles, status);
     }
 }
