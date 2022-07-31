@@ -22,12 +22,12 @@
             <button type="submit"><@spring.message "login"/></button>
             <p class="message"><@spring.message "not_registered"/> <a href="/signUp"><@spring.message "create_an_account"/></a></p>
         </form>
-<#--        <#if invalidPass??>-->
-<#--            <div class="alert">-->
-<#--                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
-<#--                Invalid username or password-->
-<#--            </div>-->
-<#--        </#if>-->
+        <#if invalidPass??>
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                Invalid username or password
+            </div>
+        </#if>
     </div>
 </div>
 </body>

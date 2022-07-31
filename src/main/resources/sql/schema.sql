@@ -1,24 +1,14 @@
-create table confirmation_token
+create table users
 (
-    token_id           bigint not null
+    id           bigint not null
         primary key,
-    confirmation_token varchar(255),
-    created_date       timestamp,
-    user_id            bigint not null
-        constraint fkah4p1rycwibwm6s9bsyeckq51
-            references users
-);
-create table films
-(
-    id          bigint  not null
-        primary key,
-    age         integer not null,
-    description varchar(255),
-    title       varchar(255),
-    year        integer not null,
-    poster      bigint
-        constraint fkcsw6qfiow49y5psdhtby4ip39
-            references images
+    email        varchar(255),
+    firstname    varchar(255),
+    last_name    varchar(255),
+    password     varchar(255),
+    phone_number varchar(255),
+    roles        varchar(255),
+    status       varchar(255)
 );
 create table halls
 (
@@ -44,6 +34,30 @@ create table messages
     text   varchar(255),
     time   varchar(255)
 );
+create table confirmation_token
+(
+    token_id           bigint not null
+        primary key,
+    confirmation_token varchar(255),
+    created_date       timestamp,
+    user_id            bigint not null
+        constraint fkah4p1rycwibwm6s9bsyeckq51
+            references users
+);
+
+create table films
+(
+    id          bigint  not null
+        primary key,
+    age         integer not null,
+    description varchar(255),
+    title       varchar(255),
+    year        integer not null,
+    poster      bigint
+        constraint fkcsw6qfiow49y5psdhtby4ip39
+            references images
+);
+
 create table sessions
 (
     id   bigint  not null
@@ -57,6 +71,7 @@ create table sessions
         constraint fkn0sqm8rd657hqxcrwim6bg7o3
             references halls
 );
+
 create table user_session
 (
     id      bigint not null
@@ -68,6 +83,7 @@ create table user_session
         constraint fklr29o11uswdgcnn8swu3q15f8
             references users
 );
+
 create table users_avatars
 (
     user_id    bigint not null
@@ -79,6 +95,7 @@ create table users_avatars
         constraint fk92yqnxix90f8551eqjw79gx5q
             references images
 );
+
 create table users_sessions
 (
     user_id     bigint not null
@@ -89,18 +106,6 @@ create table users_sessions
             unique
         constraint fkaafjbaowiq6hywpeg9njidsbi
             references user_session
-);
-create table users
-(
-    id           bigint not null
-        primary key,
-    email        varchar(255),
-    firstname    varchar(255),
-    last_name    varchar(255),
-    password     varchar(255),
-    phone_number varchar(255),
-    roles        varchar(255),
-    status       varchar(255)
 );
 
 alter table users
