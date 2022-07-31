@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .antMatchers("/films/*/chat/messages").fullyAuthenticated()
                 .antMatchers("/films/*/chat").fullyAuthenticated()
                 .antMatchers("/uploadAvatar").fullyAuthenticated()
-                .antMatchers("/chat", "/topic", "/app",  "/app/**","/app/**", "/topic/messages").authenticated()
+                .antMatchers("/chat", "/topic", "/app", "/app/**","/app/**", "/topic/messages").authenticated()
                 .antMatchers("/chat/**", "/topic/**").authenticated()
                 .antMatchers("/confirm/*").permitAll()
                 .antMatchers("/", "/img/**", "/js/**", "/css/**").permitAll()

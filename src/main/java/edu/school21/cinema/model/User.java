@@ -5,7 +5,6 @@ import edu.school21.cinema.annotations.ValidPassword;
 import edu.school21.cinema.enums.Role;
 import edu.school21.cinema.enums.UserStatus;
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

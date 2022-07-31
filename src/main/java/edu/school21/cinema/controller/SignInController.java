@@ -39,7 +39,7 @@ public class SignInController {
     }
 
     @PostMapping
-    public String addUser(HttpServletRequest request, Model model) {
+    public String doPost(HttpServletRequest request, Model model) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
