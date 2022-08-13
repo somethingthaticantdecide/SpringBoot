@@ -1,52 +1,59 @@
 package edu.school21.cinema.controller;
 
+import edu.school21.cinema.enums.UserStatus;
 import edu.school21.cinema.model.User;
-import edu.school21.cinema.model.UserSession;
-import edu.school21.cinema.services.UserSessionService;
-import edu.school21.cinema.services.UsersService;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.school21.cinema.services.UserService;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/signIn")
 public class SignInController {
 
-    private final UsersService usersService;
-    private final UserSessionService userSessionService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public SignInController(UsersService usersService, UserSessionService userSessionService) {
-        this.usersService = usersService;
-        this.userSessionService = userSessionService;
+    public SignInController(UserService userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
-    public String doGet() {
-        return "signIn";
-    }
-
-    @PostMapping
-    public String doPost(HttpServletRequest request) {
-        String username = request.getParameter("username");
-        User user = usersService.find(username);
-        if (user != null && Objects.equals(user.getPassword(), request.getParameter("password"))) {
-            request.getSession().setAttribute("username", username);
-
-            UserSession userSession = userSessionService.createSession(user, request.getRemoteAddr());
-            userSessionService.add(userSession);
-
-            user.getSessions().add(userSession);
-            usersService.update(user);
-            return username.equals("admin") ? "redirect:/admin/panel" : "redirect:/sessions";
+    public String doGet(HttpServletRequest request) {
+        if (request.isUserInRole("ROLE_ADMIN")) {
+            return "redirect:/admin/panel";
+        } else if (request.isUserInRole("ROLE_USER")) {
+            User user = userService.find(request.getUserPrincipal().getName());
+            return user.getStatus().equals(UserStatus.CONFIRMED) ? "redirect:/sessions" : "redirect:/denied";
         }
         return "signIn";
     }
 
+    @PostMapping
+    public String doPost(HttpServletRequest request, Model model) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        User user = userService.find(username);
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            if (!user.getStatus().equals(UserStatus.CONFIRMED)) {
+                return "redirect:/denied";
+            }
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            userService.addUserSession(request.getRemoteAddr(), user);
+            return "redirect:/sessions";
+        }
+        model.addAttribute("invalidPass", true);
+        return "signIn";
+    }
 }

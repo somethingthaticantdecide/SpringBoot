@@ -1,59 +1,23 @@
+<!DOCTYPE html>
 <html lang="ru">
-<head><title> FreeMarker Spring MVC Hello World</title>
-	<style>
-		/*body {*/
-		/*	background: #eeeae5;*/
-		/*}*/
-
-		h2 {
-			margin-bottom: 50px;
-		}
-
-		.container {
-			text-align: center;
-			overflow: hidden;
-			width: 800px;
-			margin: 0 auto;
-		}
-
-		.container table {
-			width: 100%;
-		}
-
-		.container td, .container th {
-			padding: 10px;
-		}
-
-		.container td:first-child, .container th:first-child {
-			padding-left: 20px;
-		}
-
-		.container td:last-child, .container th:last-child {
-			padding-right: 20px;
-		}
-
-		.container th {
-			border-bottom: 1px solid #ddd;
-			position: relative;
-		}
-	</style>
+<head>
+	<meta charset="UTF-8">
+	<link href="/css/admin.css" rel="stylesheet" type="text/css">
+</head>
 <body>
 <div id="header">
-	<H2>
-		Add Hall
-	</H2>
+	<H2>Add Hall</H2>
 </div>
-
 <div class="container">
 	<fieldset>
 		<legend>Add Hall</legend>
 		<form name="hall" action="/admin/panel/halls/add" method="post">
-			name: <input type="text" name="name" /><br/>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			name: <input type="text" name="name"  maxlength="255"/><br/>
 			seats: <input type="number" value="10" min="0" max="200" name="seats" /><br/>
 			<input type="submit" value="   Save   " />
 		</form>
 	</fieldset>
-
 	<br/>
 	<table class="order-table">
 		<tr>

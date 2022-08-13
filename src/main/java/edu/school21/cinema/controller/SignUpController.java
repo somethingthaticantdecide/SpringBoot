@@ -1,60 +1,56 @@
 package edu.school21.cinema.controller;
 
+import edu.school21.cinema.enums.UserStatus;
 import edu.school21.cinema.model.User;
-import edu.school21.cinema.model.UserSession;
-import edu.school21.cinema.services.UserSessionService;
-import edu.school21.cinema.services.UsersService;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.school21.cinema.services.EmailSenderService;
+import edu.school21.cinema.services.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/signUp")
 public class SignUpController {
 
-    private final UsersService usersService;
-    private final UserSessionService userSessionService;
+    private final UserService userService;
 
-    @Autowired
-    public SignUpController(UsersService usersService, UserSessionService userSessionService) {
-        this.usersService = usersService;
-        this.userSessionService = userSessionService;
+    public SignUpController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
-    public String doGet() {
+    public String doGet(HttpServletRequest request, @ModelAttribute("userDetail") User userDetail) {
+        if (request.isUserInRole("ROLE_ADMIN")) {
+            return "redirect:/admin/panel";
+        } else if (request.isUserInRole("ROLE_USER")) {
+            User user = userService.find(request.getUserPrincipal().getName());
+            return user != null && user.getStatus().equals(UserStatus.CONFIRMED) ? "redirect:/sessions" : "redirect:/denied";
+        }
         return "signUp";
     }
 
     @PostMapping
-    public String doPost(HttpServletRequest req) {
-        String firstName = req.getParameter("firstName");
-        if (usersService.find(firstName) != null)
+    public String addUser(@Valid @ModelAttribute("userDetail") User user, BindingResult bindingResult, HttpServletRequest request) {
+        if (bindingResult.hasErrors()) {
             return "signUp";
-
-        User user = new User();
-        user.setFirstname(firstName);
-        user.setLastName(req.getParameter("lastName"));
-        user.setPhoneNumber(req.getParameter("phoneNumber"));
-        user.setPassword(req.getParameter("password"));
-        user.setAvatars(new ArrayList<>());
-        user.setSessions(new ArrayList<>());
-        usersService.add(user);
-
-        UserSession userSession = userSessionService.createSession(user, req.getRemoteAddr());
-        userSessionService.add(userSession);
-
-        user.getSessions().add(userSession);
-        usersService.update(user);
-
-        return "redirect:/sessions";
+        }
+        if (!user.getPassword().equals(user.getPasswordConfirm())){
+            bindingResult.rejectValue("password", "errors.password.mismatch", "errors.password.mismatch");
+            return "signUp";
+        }
+        if (!userService.saveUser(user)){
+            bindingResult.rejectValue("firstname", "errors.username.exists", "errors.username.exists");
+            return "signUp";
+        }
+        userService.addUserSession(request.getRemoteAddr(), user);
+        return "redirect:/";
     }
 
 }

@@ -1,50 +1,24 @@
+<#import "spring.ftl" as spring />
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+	<meta charset="UTF-8">
 	<title>Cinema</title>
 </head>
-<style>
-	body, input {
-		font-family: Calibri, Arial, sans-serif;
-		margin: 0;
-		padding: 0;
-	}
-	#header h2 {
-		color: #4CAF50;
-		height: 50px;
-		padding: 5px 0 0 5px;
-		font-size: 20px;
-		text-align: center;
-	}
-	#content {
-		padding: 5px;
-		margin: 5px;
-		text-align: center
-	}
-	.button {
-		font-family: "Roboto", sans-serif;
-		text-transform: uppercase;
-		outline: 0;
-		background: #4CAF50;
-		border: 0;
-		padding: 15px;
-		color: #FFFFFF;
-		font-size: 14px;
-		-webkit-transition: all;
-		transition: all ;
-		cursor: pointer;
-	}
-</style>
+<link href="/css/panel.css" rel="stylesheet" type="text/css">
 <body>
+<form style="text-align: right" method="post" action="/logout">
+	<input type="hidden" name="_csrf" value="${_csrf.token}">
+	<button type="submit"><@spring.messageText "logout" "Logout"/></button>
+</form>
 <div id="header">
-	<H2>Cinema admin panel</H2>
+	<H2><@spring.message "admin_panel.header"/></H2>
 </div>
-
 <div id="content">
-	<a href="/admin/panel/films"><button class="button">Add films</button></a>
-	<a href="/admin/panel/halls"><button class="button">Add halls</button></a>
-	<a href="/admin/panel/sessions"><button class="button">Add sessions</button></a>
-	<a href="/sessions"><button class="button">Find Sessions</button></a>
+	<a href="/admin/panel/films"><button class="button"><@spring.message "admin_panel.add_film"/></button></a>
+	<a href="/admin/panel/halls"><button class="button"><@spring.message "admin_panel.add_halls"/></button></a>
+	<a href="/admin/panel/sessions"><button class="button"><@spring.message "admin_panel.add_sessions"/></button></a>
+	<a href="/sessions"><button class="button"><@spring.message "admin_panel.find_sessions"/></button></a>
 </div>
 </body>
 </html>

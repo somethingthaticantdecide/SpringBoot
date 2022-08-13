@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "images")
 public class Image extends AbstractEntity {
 
+    @Column(columnDefinition = "text")
     private String filename;
     private Long size;
     private String mime;

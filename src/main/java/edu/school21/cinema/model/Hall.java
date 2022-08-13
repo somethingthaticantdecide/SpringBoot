@@ -13,6 +13,7 @@ import java.util.Objects;
 @Table(name = "halls")
 public class Hall extends AbstractEntity {
 
+    @Column(columnDefinition = "text")
     private String name;
     private int seats;
 

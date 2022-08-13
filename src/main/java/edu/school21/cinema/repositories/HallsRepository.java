@@ -1,15 +1,7 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.model.Hall;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface HallsRepository {
-
-    void add(Hall hall);
-
-    List<Hall> getHalls();
-
-    Hall getHallById(Integer id);
-
+public interface HallsRepository extends JpaRepository<Hall, Long> {
 }

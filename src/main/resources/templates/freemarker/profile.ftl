@@ -1,37 +1,14 @@
-<html>
-<style>
-    #sessions {
-        margin-top: 150px;
-        width: 32%;
-        overflow-y:scroll;
-        height:200px;
-        display:block;
-        margin-right: 34%;
-        float: right;
-    }
-    #avatar {
-        margin-top: 200px;
-        margin-left: 500px;
-        margin-right: auto;
-        float: left;
-    }
-    #upload {
-        margin-left: 500px;
-        margin-right: auto;
-        width: 128px;
-    }
-    #images {
-        margin-left: 500px;
-        margin-right: auto;
-        width: 39%;
-        overflow-y: scroll;
-        height: 200px;
-        display: block;
-    }
-</style>
+<#import "spring.ftl" as spring />
+<link href="/css/profile.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+<html lang="ru">
 <body>
+<form style="text-align: right" method="post" action="/logout">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <button type="submit"><@spring.messageText "logout" "Logout"/></button>
+</form>
 <#if avatar??>
-    <img id="avatar" src="/images/${avatar.filename}" height="128" width="128">
+    <img id="avatar" src="/images/${avatar.filename}" height="128" width="128" alt="empty profile image">
 </#if>
 <table id="sessions" border="1">
     <thead>
@@ -53,8 +30,8 @@
 </table>
 
 <form id="upload" method="POST" action="uploadAvatar" enctype="multipart/form-data" >
-    File:
-    <input type="file" name="file" id="file" /> <br/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    File:<input type="file" name="file" id="file"/>
     <br/>
     <input type="submit" value="Upload" name="upload"/>
 </form>

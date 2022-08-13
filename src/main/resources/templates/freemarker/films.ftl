@@ -1,55 +1,23 @@
+<#import "/spring.ftl" as spring/>
+<link href="/css/admin.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
 <html lang="ru">
-<head><title>Films</title>
-	<style>
-		/*body {*/
-		/*	background: #eeeae5;*/
-		/*}*/
-
-		h2 {
-			margin-bottom: 50px;
-		}
-
-		.container {
-			text-align: center;
-			overflow: hidden;
-			width: 800px;
-			margin: 0 auto;
-		}
-
-		.container table {
-			width: 100%;
-		}
-
-		.container td, .container th {
-			padding: 10px;
-		}
-
-		.container td:first-child, .container th:first-child {
-			padding-left: 20px;
-		}
-
-		.container td:last-child, .container th:last-child {
-			padding-right: 20px;
-		}
-
-		.container th {
-			border-bottom: 1px solid #ddd;
-			position: relative;
-		}
-	</style>
+<head>
+	<meta charset="UTF-8">
+</head>
 <body>
 <div id="header">
 	<H2>Add Films</H2>
 </div>
-
 <div class="container">
 	<fieldset>
 		<legend>Add Film</legend>
 		<form name="film" action="/admin/panel/films/add" method="post" enctype="multipart/form-data">
-			title: <input type="text" name="title" /><br/>
-			year: <input type="number" value="0" min="0" name="year" /><br/>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			title: <input type="text" name="title" maxlength="255"/><br/>
+			year: <input type="number" min="1900" max="2099" step="1" value="2022" name="year" /><br/>
 			age: <input type="number" value="0" min="0" name="age" /><br/>
-			description: <input type="text" name="description" /><br/>
+			description: <input type="text" name="description" maxlength="255"/><br/>
 			<input type="file" name="file" accept="image/*" style="background-color: darkgrey">
 			<button type="submit">Save</button>
 		</form>

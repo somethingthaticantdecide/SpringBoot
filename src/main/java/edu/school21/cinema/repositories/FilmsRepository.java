@@ -1,16 +1,7 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.model.Film;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface FilmsRepository {
-
-    void add(Film film);
-
-    List<Film> getFilms();
-
-    Film getByTitle(String filmName);
-
-    Film getFilmById(Integer getFilmById);
+public interface FilmsRepository extends JpaRepository<Film, Long> {
 }

@@ -1,15 +1,18 @@
 package edu.school21.cinema.model;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
+@RequiredArgsConstructor
 @ToString
-@NoArgsConstructor
-@Table
 public class UserSession extends AbstractEntity {
 
     @ManyToOne
@@ -20,10 +23,17 @@ public class UserSession extends AbstractEntity {
     private String time;
     private String ip;
 
-    public UserSession(User user, String date, String time, String ip) {
-        this.user = user;
-        this.date = date;
-        this.time = time;
-        this.ip = ip;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        UserSession that = (UserSession) o;
+        return Objects.equals(user, that.user) && Objects.equals(date, that.date) && Objects.equals(time, that.time) && Objects.equals(ip, that.ip);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), user, date, time, ip);
     }
 }

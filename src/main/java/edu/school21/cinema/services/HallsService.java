@@ -15,14 +15,14 @@ public class HallsService {
     }
 
     public List<Hall> listHalls() {
-        return hallsRepository.getHalls();
+        return hallsRepository.findAll();
     }
 
     public void add(Hall hall) {
-        hallsRepository.add(hall);
+        hallsRepository.save(hall);
     }
 
-    public Hall getHallById(Integer id){
-        return hallsRepository.getHallById(id);
+    public Hall getHallById(Long id){
+        return hallsRepository.findById(id).orElse(null);
     }
 }
