@@ -29,7 +29,7 @@ public class ConfirmationController {
     public String doGet(ModelMap model, @PathVariable String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
         if(token != null) {
-            User user = userRepository.findByFirstname(token.getUser().getFirstname());
+            User user = token.getUser();
             user.setStatus(UserStatus.CONFIRMED);
             userRepository.save(user);
             model.addAttribute("title", "Congratulations!");
